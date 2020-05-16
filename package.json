@@ -3,6 +3,14 @@
 	"version": "1.0.3",
 	"description": "Javascript string validator",
 	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Icaruk/validame"
+	},
+	"bugs": {
+		"url": "https://github.com/Icaruk/validame"
+	},
+	"homepage": "https://github.com/Icaruk",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -13,6 +21,6 @@
 		"form",
 		"input"
 	],
-	"author": "Icaruk",
+	"author": "Icaruk <adri-rk@hotmail.com>",
 	"license": "ISC"
 }
