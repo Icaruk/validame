@@ -1,0 +1,36 @@
+{
+    "idleHeartbeats": 3017,
+    "navigatingHeartbeats": 2080,
+    "totalCodingHeartbeats": 12322,
+    "languageHeartbeats": {
+        "jsonc": 26,
+        "javascript": 10939,
+        "json": 197,
+        "code-runner-output": 706,
+        "markdown": 282,
+        "scminput": 19,
+        "plaintext": 153
+    },
+    "fileHeartbeats": {
+        "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 0,
+        "index.js": 4351,
+        "package.json": 197,
+        "extension-output-#9": 636,
+        "test.js": 1956,
+        "index2.js": 1362,
+        "validations/min.js": 86,
+        "validations/max.js": 85,
+        "extension-output-#12": 70,
+        "utils/multiReplace.js": 53,
+        "test2.js": 38,
+        "README.md": 282,
+        "validations/req.js": 530,
+        "Untitled-1": 365,
+        "utils/strToRegex.js": 46,
+        "scm\\git\\scm0\\input": 19,
+        "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\keybindings.json": 26,
+        "fnc.js": 89,
+        "validations/wl.js": 1978,
+        "Untitled-2": 153
+    }
+}
