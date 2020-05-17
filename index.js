@@ -111,6 +111,7 @@ const validation = (string = "", objValidationTypes = {}) => {
 				error = fnc(errorMessagesArr, string, value);
 			};
 			
+			
 			if (error !== "") return error;
 			
 		};
@@ -118,7 +119,7 @@ const validation = (string = "", objValidationTypes = {}) => {
 	};
 	
 	
-	console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
+	// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
 	
 	
 	return error;

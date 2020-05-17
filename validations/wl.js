@@ -1,6 +1,7 @@
 
 module.exports = (codeToRegex, errorMessagesArr, string, strCodes) => {
 	
+	if (! string) string = "";
 	let arrWl = strCodes.split(" "); // "a A 1" → ["a", "A", "1"]
 	
 	
@@ -21,13 +22,13 @@ module.exports = (codeToRegex, errorMessagesArr, string, strCodes) => {
 	// Si todavía queda algo, es que hay algo mal
 	if (string !== "") {
 		
-		let error = errorMessagesArr.base;
+		let error = errorMessagesArr.base + " ";
 		let maxIdx = arrWl.length - 1;
 		
 		
 		arrWl.forEach( (_x, idx) => {
 			
-			if (idx === maxIdx) error += ` ${errorMessagesArr.and} `; // último separador
+			if (idx === maxIdx && maxIdx > 0) error += ` ${errorMessagesArr.and} `; // último separador
 			
 			error += errorMessagesArr[_x];
 			

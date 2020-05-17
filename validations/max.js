@@ -4,6 +4,7 @@ const multiReplace = require("../utils/multiReplace");
 
 module.exports = (errorMessagesArr, string, maxLength) => {
 	
+	if (! string) string = "";
 	let length = string.length;
 	
 	if (length > maxLength) {
