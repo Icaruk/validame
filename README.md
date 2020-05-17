@@ -45,7 +45,7 @@ let error = vldm.v("Dog", {
 
 ```js
 
-let error = vldm.v("My dog name is Mike", {
+let error = vldm.v("My name is Mike", {
 	wl: "1"
 });
 
@@ -55,7 +55,7 @@ let error = vldm.v("My dog name is Mike", {
 
 ```js
 
-let error = vldm.v("My dog name is Mike", {
+let error = vldm.v("My name is Mike", {
 	wl: "a 1"
 });
 
@@ -65,7 +65,7 @@ let error = vldm.v("My dog name is Mike", {
 
 ```js
 
-let error = vldm.v("My dog name is Mike", {
+let error = vldm.v("My name is Mike", {
 	wl: "a A"
 });
 
@@ -75,7 +75,7 @@ let error = vldm.v("My dog name is Mike", {
 
 ```js
 
-let error = vldm.v("My dog name is Mike", {
+let error = vldm.v("My name is Mike", {
 	wl: "a A _"
 });
 
