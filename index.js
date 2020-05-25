@@ -12,19 +12,31 @@ const options = {
 			max: [
 				"Debería tener _%1 caracteres como máximo pero tiene _%2."
 			],
+			minmax: [
+				"Debería tener _%1 caracteres pero tiene _%2."
+			],
 			req: [
 				"No puede estar vacío."
 			],
 			wl: {
 				"base": "Sólo se permiten: ",
-				"and": "y",
+				"and": " y ",
 				"a": "minúsculas",
 				"A": "mayúsculas",
 				"1": "números",
 				"_": "espacios",
 				"!": "caracteres especiales",
 				"ñ": "acentos y ñ",
-			}
+				
+				phoneEs: {
+					"1": "Sólo puede contener números",
+					"2": "Tiene que tener tener 9 números",
+					"3": "Tiene que ser un número español",
+				},
+				
+			},
+			
+			
 		},
 		
 		en: {
@@ -34,42 +46,55 @@ const options = {
 			max: [
 				"It should have _%1 maximum characters but it has _%2."
 			],
+			minmax: [
+				"It should have _%1 characters but it has _%2."
+			],
 			req: [
 				"It can't be empty."
 			],
 			wl: {
-				"base": "It's only allowed:",
-				"and": "and",
+				"base": "It's only allowed: ",
+				"and": " and ",
 				"a": "lowercase",
 				"A": "uppercase",
 				"1": "numbers",
 				"_": "spaces",
 				"!": "special characteres",
 				"ñ": "accent and ñ",
-			}
-		}
+				
+				phoneEs: {
+					"1": "It must contain only numbers",
+					"2": "It must have 9 numbers",
+					"3": "It must be a spanish number",
+				},
+				
+			},
+			
+		},
 		
 	},
 	
-	codeToRegex: {
+	ruleToFnc: {
+		
+		"min": require("./validations/min"),
+		"max": require("./validations/max"),
+		"minmax": require("./validations/minmax"),
+		"req": require("./validations/req"),
+		"wl": require("./validations/wl"),
+		
+	},
+	
+	symbolToFnc: {
 		"a": /[a-z]/g,
 		"A": /[A-Z]/g,
 		"1": /[0-9]/g,
 		"_": /\s/g,
 		"!": /[.#·:$%&()?¿!¡@|+_\\-ºª]/g,
 		"ñ": /[ñáéíóú]/g,
+		
+		"phoneEs": require("./validations/phone").phoneEs,
+		
 	},
-	
-};
-
-
-
-const stringToFnc = {
-	
-	"min": require("./validations/min"),
-	"max": require("./validations/max"),
-	"req": require("./validations/req"),
-	"wl": require("./validations/wl"),
 	
 };
 
@@ -80,7 +105,7 @@ const stringToFnc = {
  * ___
  * 
  * @param {string} string - String to validate.
- * @param {object} objValidationTypes - Object that contain the list of validations to make.
+ * @param {object} rules - Object that contains a list with one or more rules.
  * 
  * ___
  * 
@@ -88,27 +113,37 @@ const stringToFnc = {
  * 
 */
 
-const validation = (string = "", objValidationTypes = {}) => {
-		
+const validation = (string = "", rules = {}) => {
+	
 	// if (string === "") return "";
 	
 	let error = "";
 	
 	
-	// Recorro el objeto de validación
-	for (const [key, value] of Object.entries(objValidationTypes)) {
+	// Recorro las reglas
+	for (const [key, value] of Object.entries(rules)) {
 		
-		let fnc = stringToFnc[key];
+		// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
+		let fnc = options.ruleToFnc[key];
+		
+		
 		
 		if (fnc) {
 			
+			// Obtengo el string de mensaje de error
 			let errorMessagesArr = options.messages[options.language][key]; // ["a", "b"...]
 			
 			
 			if (key === "wl") {
-				error = fnc(options.codeToRegex, errorMessagesArr, string, value);
+				
+				// Aquí llamo a la función wl con los parámetros que necesita
+				error = fnc(options.symbolToFnc, errorMessagesArr, string, value);
+				
 			} else {
+				
+				// Aquí llamo a la función req, min, max...
 				error = fnc(errorMessagesArr, string, value);
+				
 			};
 			
 			
@@ -123,7 +158,7 @@ const validation = (string = "", objValidationTypes = {}) => {
 	
 	
 	return error;
-
+	
 };
 
 
@@ -138,8 +173,6 @@ class Validame {
 		this.o = options;
 		this.v = validation;
 		
-		
-		// console.log( typeof this.instance );
 		
 		if (this.instance) {
 			return this.instance;
@@ -197,53 +230,6 @@ const asd = (tipoValidacion = "", textoParaValidar = "", required = false, minLe
 
 
 	switch (tipoValidacion) {
-
-		case "#123": {
-			let regex = new RegExp(/^[0-9]*$/, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener números.";
-
-			break;
-		};
-		case "#123_": {
-			let regex = new RegExp(/^[0-9\s ]*$/, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener números y espacios.";
-
-			break;
-		};
-
-		case "#abc": {
-			let regex = new RegExp(`^[a-z${spanishCharacters}]*$`, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener letras.";
-
-			break;
-		};
-		case "#abc_": {
-			let regex = new RegExp(`^[a-z${spanishCharacters}\s ]*$`, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener letras y espacios.";
-
-			break;
-		};
-
-		case "#abc123": {
-			let regex = new RegExp(`^[a-z${spanishCharacters}0-9]*$`, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener letras y números.";
-
-			break;
-		};
-		case "#abc123_": {
-			let regex = new RegExp(`^[a-z${spanishCharacters}0-9\s ]*$`, flags);
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Sólo debe contener letras, números y espacios.";
-
-			break;
-		};
-
-
 
 		case "telefono": {
 

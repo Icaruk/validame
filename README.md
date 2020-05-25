@@ -4,23 +4,30 @@
 
 <div style="text-align:center">
 	<h1> validame </h1>
-	<img src="https://i.gyazo.com/8d775e85f5e9c5af12332fa13454359b.png" />
+	<img src="https://i.gyazo.com/a979d99bac6f4e8d04ee8668634f1cf9.png" />
 </div>
 
 
 
-**validame** is a lightweight javascript **string validator** with zero dependencies.<br>
-With a few characters you can validate any string.
+**validame** is a lightweight javascript **string validator**.
+
+- 🚀 Lightweight (23 kB).
+- ⚪️ Zero dependencies.
+- 🔧 Totally customizable.
+- 🧩 Modular.
+- 🌍 Multilanguage.
 
 
 
-# Import
+# ⬇️ Import
 
-	const vldm = require("validame");
+```js
+const vldm = require("validame");
+```
 
 
 
-# Basic examples:
+# 🔮Basic examples:
 
 ```js
 
@@ -89,57 +96,58 @@ let error = vldm.v("My name is Mike", {
 
 
 
-# Usage:
+# 🧭 Usage:
 
 **Returns** an empty string if the validation is correct, otherwise it returns an string explaining the error.
 
 ```js
-vldm.v (stringToValidate, validationObject);
+vldm.v (stringToValidate, rules);
 ```
 
 - **stringToValidate** (string):
 	- The string you want to validate.
 	
-- **validationObject** object):
+- **rules** (object):
 	- One or more of the following:
 
 ```js
-	{
-		// Minimum number of characters
-		min: 1,
-		
-		// Maximum number of characters
-		max: 10,
-		
-		// 0: Not required
-		// 1: It pass with "" but fails with null.
-		// 2: It fails with "" and null.
-		req: 1,
-		
-		// It's a whitelist (explained below), separated with a space.
-		wl: "a A _ 1",
-		
-	}
-```
-
-Order example:
-
-```js
 {
-	min: 5,
-	max: 10
+	// Minimum number of characters
+	min: 1,
+	
+	// Maximum number of characters
+	max: 10,
+	
+	// Exact number of characters
+	minmax: 5,
+	
+	// 0: Empty string or null will return "" (OK).
+	// 1: Empty string will return "" (OK) but null will return error.
+	// 2: Empty string OR null will return error.
+	req: 1,
+	
+	// (Explained below) Contains a list of symbols separated with a space.
+	wl: "a A _ 1",
+	
 }
 ```
 
-First it will check if the _stringToValidate_ has at least 5 characters.
-Then it will check if it has 10 characters or less.
+The rules will be checked in the same order they are listed, example:
+
+```js
+{
+	min: 5, // first check
+	max: 10 // second check
+}
+```
 
 
-## wl: validationCodes
 
-- All characters from stringToValidate must match with at least one of the validationCodes.
-- They must be separated with a space.
-- Possible validation codes:
+## 🏳️ Rule wl (whitelist):
+
+- The symbol list must be separated with a space, example: `a A _ !`.
+- Each symbol has a regex or function association.
+- Possible validation codes and their associations:
 
 	- `a`: `a-z`
 	- `A`: `A-Z`
@@ -157,13 +165,13 @@ Then it will check if it has 10 characters or less.
 
 
 
-# Options:
+# ⚙️ Options:
 
 They are at: `vldm.o`
 
 
 
-#### Property _language_
+#### 🌍 Property _language_
 
 `vldm.o.language`
 
@@ -175,11 +183,11 @@ At the moment the possible options are:
 
 
 
-#### Property _messages_
+#### 🧾 Property _messages_
 
 `vldm.o.messages`
 
-This property contain an object with the following structure:
+This property contains all the error messages given. The object has the following structure:
 
 ```js
 languageCode: {
@@ -217,9 +225,13 @@ Currently `vldm.o.messages.en` contains:
 The `_%1` `_%2` (and so on) are replacers.
 
 
-#### Property _codeToRegex_
+#### 🧱 Property _symbolToFnc_
 
-`vldm.o.codeToRegex`
+`vldm.o.symbolToFnc`
+
+This property contains the regex/function of each symbol.<br>
+You can add your own.
+
 
 ```js
 {
@@ -233,11 +245,31 @@ The `_%1` `_%2` (and so on) are replacers.
 ```
 
 
+#### 🧱 Property _ruleToFnc_
+
+`vldm.o.ruleToFnc`
+
+This property contains the functions that makes the validation of each rule.<br>
+You can add your own.
+
+
+```js
+{
+	"min": [Function],
+	"max": [Function],
+	"minmax": [Function],
+	"req": [Function],
+	"wl": [Function]
+},
+```
+
+
+
 <br>
 
 
-	
-# Advanced examples:
+
+# 💡 Advanced examples:
 
 
 ```js
@@ -309,6 +341,8 @@ let error = vldm.v(null, {
 
 // error = "It can't be empty."
 ```
+
+
 
 
 

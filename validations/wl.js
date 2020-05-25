@@ -1,51 +1,83 @@
 
-module.exports = (codeToRegex, errorMessagesArr, string, strCodes) => {
+module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 	
 	if (! string) string = "";
 	let arrWl = strCodes.split(" "); // "a A 1" → ["a", "A", "1"]
 	
 	
-	for (_code of arrWl) {
+	
+	// Símbolo único
+	// if (arrWl.length === 1) {
 		
-		let regex = codeToRegex[_code];
+	// 	console.log( "UNIQUE SYMBOL" );
+		
+	// 	let specialCode = arrWl[0]; // "phone"
+		
+	// 	return;
+		
+	// };
+	
+	
+	
+	// Itero los símbolos
+	for (_symbol of arrWl) {
+		
+		// Obtengo la función/regex
+		let fnc = symbolToFnc[_symbol];
 		
 		
-		if (regex) {
-			regex = new RegExp(regex);
-			string = string.replace(regex, "");
+		// Si no encuentro, paso al siguiente símbolo
+		if (!fnc) continue;
+		
+		
+		
+		// Es regex
+		if (typeof fnc === "object") {
+			
+			let regex = new RegExp(fnc);
+			let rest = string.replace(regex, ""); // quito todo lo que concuerde con el regex
+			
+			
+			// Si todavía queda algo, es que hay algo mal
+			if (rest !== "") {
+				
+				let error = errorMessagesObj.base;
+				let maxIdx = arrWl.length - 1;
+				
+				
+				arrWl.forEach( (_x, idx) => {
+					
+					if (idx === maxIdx && maxIdx > 0) error += `${errorMessagesObj.and}`; // último separador: "y" en lugar de ","
+					
+					error += errorMessagesObj[_x];
+					
+					if (idx < maxIdx - 1) error += ", "; // separador
+					if (idx === maxIdx) error += "."; // punto final
+					
+				});
+				
+				
+				return error;
+				
+			};
 		};
 		
-	};
-	
-	
-	
-	// Si todavía queda algo, es que hay algo mal
-	if (string !== "") {
-		
-		let error = errorMessagesArr.base + " ";
-		let maxIdx = arrWl.length - 1;
 		
 		
-		arrWl.forEach( (_x, idx) => {
+		// Es función
+		if (typeof fnc === "function") {
 			
-			if (idx === maxIdx && maxIdx > 0) error += ` ${errorMessagesArr.and} `; // último separador
+			let error = fnc(errorMessagesObj[_symbol], string);
+			return error;
 			
-			error += errorMessagesArr[_x];
-			
-			if (idx < maxIdx - 1) error += ", "; // separador
-			if (idx === maxIdx) error += "."; // punto final
-			
-		});
+		};
 		
-		
-		return error;
 		
 		
 	};
 	
 	
 	return "";
-	
 	
 };
 
