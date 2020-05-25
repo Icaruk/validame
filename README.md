@@ -19,11 +19,19 @@
 
 
 
+---
+
+
+
 # ⬇️ Import
 
 ```js
 const vldm = require("validame");
 ```
+
+
+
+---
 
 
 
@@ -92,7 +100,7 @@ let error = vldm.v("My name is Mike", {
 
 
 
-<br>
+---
 
 
 
@@ -161,7 +169,7 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-<br>
+---
 
 
 
@@ -265,7 +273,7 @@ You can add your own.
 
 
 
-<br>
+---
 
 
 

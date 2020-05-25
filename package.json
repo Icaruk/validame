@@ -1,6 +1,6 @@
 {
 	"name": "validame",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Javascript string validator",
 	"main": "index.js",
 	"repository": {

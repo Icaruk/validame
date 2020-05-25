@@ -1,13 +1,13 @@
 {
-    "idleHeartbeats": 5199,
-    "navigatingHeartbeats": 4058,
-    "totalCodingHeartbeats": 19889,
+    "idleHeartbeats": 5224,
+    "navigatingHeartbeats": 4064,
+    "totalCodingHeartbeats": 19971,
     "languageHeartbeats": {
         "jsonc": 26,
         "javascript": 14386,
         "json": 275,
         "code-runner-output": 869,
-        "markdown": 4120,
+        "markdown": 4202,
         "scminput": 50,
         "plaintext": 163
     },
@@ -23,7 +23,7 @@
         "extension-output-#12": 90,
         "utils/multiReplace.js": 53,
         "test2.js": 686,
-        "README.md": 4120,
+        "README.md": 4202,
         "validations/req.js": 561,
         "Untitled-1": 383,
         "utils/strToRegex.js": 46,
