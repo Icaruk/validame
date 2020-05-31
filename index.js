@@ -29,10 +29,36 @@ const options = {
 				"ñ": "acentos y ñ",
 				
 				phoneEs: {
-					"1": "Sólo puede contener números",
-					"2": "Tiene que tener tener 9 números",
-					"3": "Tiene que ser un número español",
+					"onlyNumbers": "Sólo puede contener números",
+					"9numbers": "Tiene que tener tener 9 números",
+					"spanish": "Tiene que ser un teléfono español",
 				},
+				mobileEs: {
+					"onlyNumbers": "Sólo puede contener números",
+					"9numbers": "Tiene que tener tener 9 números",
+					"spanish": "Tiene que ser un móvil español",
+				},
+				
+				dni: {
+					"structure": "Debe seguir una de las siguiente estructuras: 12345678Z o X1234567L",
+					"finalLetter": "La letra final es incorrecta",
+				},
+				
+				iban: {
+					"structure": "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890",
+					"notValid": "El IBAN no es válido"
+				},
+				
+				email: {
+					"structure": "Debe seguir la siguiente estructura: direccion@email.es",
+				},
+				
+				postalCode: {
+					"5numbers": "Tiene que tener 5 números",
+					"onlyNumbers": "Sólo puede contener números",
+					"notValid": "El código postal no es válido"
+				},
+				
 				
 			},
 			
@@ -63,11 +89,35 @@ const options = {
 				"ñ": "accent and ñ",
 				
 				phoneEs: {
-					"1": "It must contain only numbers",
-					"2": "It must have 9 numbers",
-					"3": "It must be a spanish number",
+					"onlyNumbers": "It must contain only numbers",
+					"9numbers": "It must have 9 numbers",
+					"spanish": "It must be a spanish telephone",
+				},
+				mobileEs: {
+					"onlyNumbers": "It must contain only numbers",
+					"9numbers": "It must have 9 numbers",
+					"spanish": "It must be a spanish mobile",
 				},
 				
+				dni: {
+					"structure": "It should follow one these structures: 12345678Z o X1234567L",
+					"finalLetter": "The final letter it's incorrect",
+				},
+				
+				iban: {
+					"structure": "It should follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
+					"notValid": "The IBAN isn't valid"
+				},
+				
+				email: {
+					"structure": "It should follow the following structure: address@email.es",
+				},
+				
+				postalCode: {
+					"5numbers": "It must have 5 numbers",
+					"onlyNumbers": "It must contain only numbers",
+					"notValid": "The postal code isn't valid"
+				},		
 			},
 			
 		},
@@ -93,6 +143,11 @@ const options = {
 		"ñ": /[ñáéíóú]/g,
 		
 		"phoneEs": require("./validations/phone").phoneEs,
+		"mobileEs": require("./validations/phone").mobileEs,
+		"dni": require("./validations/dni").dni,
+		"ibanEs": require("./validations/iban").ibanEs,
+		"email": require("./validations/email").email,
+		"postalCodeEs": require("./validations/postalCode").postalCodeEs,
 		
 	},
 	
@@ -131,13 +186,13 @@ const validation = (string = "", rules = {}) => {
 		if (fnc) {
 			
 			// Obtengo el string de mensaje de error
-			let errorMessagesArr = options.messages[options.language][key]; // ["a", "b"...]
+			let errorMessagesArr = options.messages[options.language][key];
 			
 			
 			if (key === "wl") {
 				
 				// Aquí llamo a la función wl con los parámetros que necesita
-				error = fnc(options.symbolToFnc, errorMessagesArr, string, value);
+				error = fnc(options.symbolToFnc, options.messages[options.language], string, value);
 				
 			} else {
 				
@@ -189,346 +244,5 @@ class Validame {
 
 
 module.exports = new Validame();
-
-
-
-return;
-
-
-
-
-
-
-
-
-
-
-const asd = (tipoValidacion = "", textoParaValidar = "", required = false, minLength = 0, maxLength = 0, flags = "") => {
-	
-	// Tipos de validación:
-	// #123, #123_, #abc, #abc_, #abc123, #abc123_, telefono, email, cp, iban, dni
-
-
-	if (tipoValidacion === "") return "ERR: tipoValidacion undef.";
-
-
-	textoParaValidar = textoParaValidar.trim();
-	if (required && textoParaValidar === "") return "No puede estar vacío.";
-	if (!required && textoParaValidar === "") return ""; // Como no es requerido y está vacío, no hago más comprobaciones
-
-
-	let mensajeError = ""; // si todo va bien, se quedará así
-
-
-
-	// Si el tipo de validacion es #algo, compruebo longitud
-	if (tipoValidacion.slice(0, 1) === "#") {
-		let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-		if (errorLongitud) return errorLongitud;
-	};
-
-
-
-	switch (tipoValidacion) {
-
-		case "telefono": {
-
-			// Fuerzo parámetros
-			minLength = 9;
-			maxLength = 9;
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex = new RegExp(/^[0-9]*$/, "");
-			let correcto1 = regex.test(textoParaValidar);
-			if (! correcto1) return "Sólo debe contener números.";
-
-			let correcto2 = ["6", "7", "8", "9"].includes(textoParaValidar.slice(0, 1));
-			if (! correcto2) return "Debe ser un número español.";
-
-			let contieneNumerosMalos = ["901", "902", "905", "803", "806", "807"].includes(textoParaValidar.slice(0, 3));
-			if (contieneNumerosMalos) return "El teléfono no es válido.";
-
-
-			break
-		};
-
-
-
-		case "email": {
-
-			// Fuerzo parámetros
-			minLength = 1;
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "");
-			let correcto = regex.test(textoParaValidar);
-			if (! correcto) return "Debe seguir la siguiente estructura: direccion@email.es";
-
-
-			break
-		};
-
-
-
-		case "cp": {
-
-			// Fuerzo parámetros
-			minLength = 1;
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex = new RegExp(/\d/, "");
-			let correcto1 = regex.test(textoParaValidar);
-			if (! correcto1) return "Sólo puede contener números.";
-
-			regex = new RegExp(/^(?:0?[1-9]|[1-4]\d|5[0-2])\d{3}$/, "");
-			let correcto2 = regex.test(textoParaValidar);
-			if (! correcto2) return "El CP no es válido.";
-
-
-			break
-		};
-
-
-
-		case "iban": {
-
-			// Fuerzo parámetros
-			minLength = 24;
-			maxLength = 24;
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex = new RegExp(/([ES]{2})\s*\t*([0-9]{2})\s*\t*([0-9]{4})\s*\t*([0-9]{4})\s*\t*([0-9]{2})\s*\t*([0-9]{10})/, "");
-			let correcto = regex.test(textoParaValidar);
-
-			if (! correcto) {
-				return "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890";
-			};
-
-
-
-			// *******************
-			// Comprobación con algoritmo
-			// *******************
-
-			let iban = textoParaValidar.toUpperCase().trim(); // Todo a MAYÚSCULAS y quito espacios al inicio y al final
-			iban = iban.replace(/\s/g, ""); // Quito los espacios en blanco dentro del string
-
-			let letra1, letra2, num1, num2;
-			let isBanaux;
-
-
-			const modulo97 = (iban) => {
-				let parts = Math.ceil(iban.length / 7);
-				let remainer = "";
-				for (let i = 1; i <= parts; i++) {
-					remainer = String(parseFloat(remainer + iban.substr((i - 1) * 7, 7)) % 97);
-				}
-				return remainer;
-			};
-			const getnumIBAN = (letra) => {
-				let ls_letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-				return ls_letras.search(letra) + 10
-			};
-
-
-			// Se coge las primeras dos letras y se pasan a números
-			letra1 = iban.substring(0, 1);
-			letra2 = iban.substring(1, 2);
-			num1 = getnumIBAN(letra1);
-			num2 = getnumIBAN(letra2);
-
-			//Se sustituye las letras por números.
-			isBanaux = String(num1) + String(num2) + iban.substring(2);
-
-			// Se mueve los 6 primeros caracteres al final de la cadena.
-			isBanaux = isBanaux.substring(6) + isBanaux.substring(0, 6);
-
-			//Se calcula el resto, llamando a la función modulo97
-			let resto = modulo97(isBanaux);
-
-
-			if (resto != 1) { // comparo STRING con NUMBER
-				return "El IBAN no es válido.";
-			};
-
-			break
-		};
-
-
-
-		case "dni": {
-
-			// Fuerzo parámetros
-			minLength = 6;
-			maxLength = 9;
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, required, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex = new RegExp(/^[XYZ]?[0-9]{5,8}[A-Z]$/, "");
-			let correcto = regex.test(textoParaValidar);
-
-			if (! correcto) {
-				return "Debe seguir una de las siguiente estructuras: 12345678Z o X1234567L";
-			};
-
-
-
-			// *******************
-			// Compruebo letra
-			// *******************
-
-			let dni = textoParaValidar; // copio el string
-
-			if (isNaN( parseInt(textoParaValidar[0]) )) {// el primer dígito es una letra
-
-				// Sustituyo las letras XYZ por 012, respectivamente
-				dni = dni.replace("X", 0);
-				dni = dni.replace("Y", 1);
-				dni = dni.replace("Z", 2);
-
-			};
-
-			let length = textoParaValidar.length;
-			let cifra = dni.slice(0, length - 1); 			// (12345678) Z
-			let letra = dni.substr(length - 1, length); 	// 12345678 (Z)
-
-
-			// Calculo el resto y su letra asignada
-			let resto = parseInt(cifra) % 23;
-
-			const arrLetras = "TRWAGMYFPDXBNJZSQVHLCKE"; // en orden del 0 al 22: 0 = T, 1 = R, 2 = W...
-			let letraCorrecta = arrLetras[resto];
-
-
-			if (letra !== letraCorrecta) {
-				// return `La letra final del DNI es incorrecta, debería ser ${letraCorrecta}.`;
-				return `La letra final es incorrecta.`;
-			};
-
-
-			break;
-		};
-
-
-
-		case "contraseña": {
-
-			// Fuerzo parámetros
-			minLength = 8;
-			flags = "";
-
-
-
-			// *******************
-			// Compruebo longitud
-			// *******************
-
-			let errorLongitud = compruebaLongitud(textoParaValidar, true, minLength, maxLength);
-			if (errorLongitud) return errorLongitud;
-
-
-
-			// *******************
-			// Compruebo estructura
-			// *******************
-
-			let regex, correcto;
-
-			regex = new RegExp(/(?=.*[a-z])/, "");
-			correcto = regex.test(textoParaValidar);
-			if (! correcto) {return "Debe tener al menos una letra minúscula"};
-
-			regex = new RegExp(/(?=.*[A-Z])/, "");
-			correcto = regex.test(textoParaValidar);
-			if (! correcto) {return "Debe tener al menos una letra mayúscula"};
-
-			regex = new RegExp(/(?=.*[0-9])/, "");
-			correcto = regex.test(textoParaValidar);
-			if (! correcto) {return "Debe tener al menos un número"};
-
-
-			break;
-		};
-
-
-
-		default: break;
-
-	};
-
-
-
-	return mensajeError;
-
-};
 
 

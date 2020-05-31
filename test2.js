@@ -1,17 +1,21 @@
 
 // Import
-const vldm = require("./index");
+const validame = require("./index");
 
-vldm.o.language = "en";
+validame.o.language = "en";
 
 
 
-let error = vldm.v("1234", {
+let error = validame.v(null, {
 	req: 2,
-	min: 4,
-	max: 64,
-	wl: "phoneEs"
 });
 
-console.log( "Error → ", error );
+if (error === "") {
+	console.log( "✅" );
+} else {
+	console.log("❌", error );
+};
+
+
+
 

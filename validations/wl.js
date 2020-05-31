@@ -6,19 +6,6 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 	
 	
 	
-	// Símbolo único
-	// if (arrWl.length === 1) {
-		
-	// 	console.log( "UNIQUE SYMBOL" );
-		
-	// 	let specialCode = arrWl[0]; // "phone"
-		
-	// 	return;
-		
-	// };
-	
-	
-	
 	// Itero los símbolos
 	for (_symbol of arrWl) {
 		
@@ -41,15 +28,15 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 			// Si todavía queda algo, es que hay algo mal
 			if (rest !== "") {
 				
-				let error = errorMessagesObj.base;
+				let error = errorMessagesObj.wl.base;
 				let maxIdx = arrWl.length - 1;
 				
 				
 				arrWl.forEach( (_x, idx) => {
 					
-					if (idx === maxIdx && maxIdx > 0) error += `${errorMessagesObj.and}`; // último separador: "y" en lugar de ","
+					if (idx === maxIdx && maxIdx > 0) error += `${errorMessagesObj.wl.and}`; // último separador: "y" en lugar de ","
 					
-					error += errorMessagesObj[_x];
+					error += errorMessagesObj.wl[_x];
 					
 					if (idx < maxIdx - 1) error += ", "; // separador
 					if (idx === maxIdx) error += "."; // punto final
@@ -67,12 +54,10 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 		// Es función
 		if (typeof fnc === "function") {
 			
-			let error = fnc(errorMessagesObj[_symbol], string);
+			let error = fnc(errorMessagesObj, string);
 			return error;
 			
 		};
-		
-		
 		
 	};
 	
