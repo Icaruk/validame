@@ -1,25 +1,25 @@
 
 const options = {
 	
-	language: "es", // es, en, fr
+	language: "en", // es, en, fr
 	
 	messages: {
 		
 		es: {
-			min: [
-				"Debería tener _%1 caracteres como mínimo pero tiene _%2."
-			],
-			max: [
-				"Debería tener _%1 caracteres como máximo pero tiene _%2."
-			],
-			minmax: [
-				"Debería tener _%1 caracteres pero tiene _%2."
-			],
-			req: [
-				"No puede estar vacío."
-			],
+			min: {
+				"min": "Debería tener _%1 caracteres como mínimo pero tiene _%2."
+			},
+			max: {
+				"max": "Debería tener _%1 caracteres como máximo pero tiene _%2."
+			},
+			minmax: {
+				"minmax": "Debería tener _%1 caracteres pero tiene _%2."
+			},
+			req: {
+				"cantBeEmpty": "No puede estar vacío."
+			},
 			wl: {
-				"base": "Sólo se permiten: ",
+				"itsOnlyAllowed": "Sólo se permite: ",
 				"and": " y ",
 				"a": "minúsculas",
 				"A": "mayúsculas",
@@ -66,20 +66,20 @@ const options = {
 		},
 		
 		en: {
-			min: [
-				"It should have _%1 minimum characters but it has _%2."
-			],
-			max: [
-				"It should have _%1 maximum characters but it has _%2."
-			],
-			minmax: [
-				"It should have _%1 characters but it has _%2."
-			],
-			req: [
-				"It can't be empty."
-			],
+			min: {
+				"min": "It should have _%1 minimum characters but it has _%2."
+			},
+			max: {
+				"max": "It should have _%1 maximum characters but it has _%2."
+			},
+			minmax: {
+				"minmax": "It should have _%1 characters but it has _%2."
+			},
+			req: {
+				"cantBeEmpty": "It can't be empty."
+			},
 			wl: {
-				"base": "It's only allowed: ",
+				"itsOnlyAllowed": "It's only allowed: ",
 				"and": " and ",
 				"a": "lowercase",
 				"A": "uppercase",
@@ -117,7 +117,7 @@ const options = {
 					"5numbers": "It must have 5 numbers",
 					"onlyNumbers": "It must contain only numbers",
 					"notValid": "The postal code isn't valid"
-				},		
+				},
 			},
 			
 		},
@@ -139,8 +139,9 @@ const options = {
 		"A": /[A-Z]/g,
 		"1": /[0-9]/g,
 		"_": /\s/g,
-		"!": /[.#·:$%&()?¿!¡@|+_\\-ºª]/g,
+		"!": /[ºª\\!\|"@·#€\$%&¬\/\(\)=\?'¿¡\^`\[\+\]´,{}\-_<>~]/g,
 		"ñ": /[ñáéíóú]/g,
+		"Ñ": /[ÑÁÉÍÓÚ]/g,
 		
 		"phoneEs": require("./validations/phone").phoneEs,
 		"mobileEs": require("./validations/phone").mobileEs,
@@ -218,6 +219,12 @@ const validation = (string = "", rules = {}) => {
 
 
 
+const utils = {
+	multiReplace: require("./utils/multiReplace"),
+};
+
+
+
 class Validame {
 	
 	instance = null;
@@ -227,6 +234,7 @@ class Validame {
 		
 		this.o = options;
 		this.v = validation;
+		this.u = utils;
 		
 		
 		if (this.instance) {

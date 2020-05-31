@@ -2,14 +2,14 @@
 const multiReplace = require("../utils/multiReplace");
 
 
-module.exports = (errorMessagesArr, string, minLength) => {
+module.exports = (errorMessagesObj, string, minLength) => {
 	
 	if (! string) string = "";
 	let length = string.length;
 	
 	if (length < minLength) {
-	
-		let strError = multiReplace(errorMessagesArr[0], {
+		
+		let strError = multiReplace(errorMessagesObj.min, {
 			"_%1": minLength,
 			"_%2": length,
 		});

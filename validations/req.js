@@ -1,5 +1,5 @@
 
-module.exports = (errorMessagesArr, string, mode) => {
+module.exports = (errorMessagesObj, string, mode) => {
 	
 	let error = "";
 	
@@ -9,7 +9,7 @@ module.exports = (errorMessagesArr, string, mode) => {
 		// Da error si viene como ""
 		case 1:
 			if (string == "") {
-				error = errorMessagesArr[0];
+				error = errorMessagesObj.cantBeEmpty;
 			};
 		break;
 		
@@ -17,7 +17,7 @@ module.exports = (errorMessagesArr, string, mode) => {
 		// Da error si viene como null o ""
 		case 2:
 			if (string === null || string === "") {
-				error = errorMessagesArr[0];
+				error = errorMessagesObj.cantBeEmpty;
 			};
 		break;
 		

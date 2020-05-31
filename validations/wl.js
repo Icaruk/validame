@@ -5,6 +5,9 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 	let arrWl = strCodes.split(" "); // "a A 1" → ["a", "A", "1"]
 	
 	
+	let rest = string // para el modo objeto
+	let isRegex;
+	
 	
 	// Itero los símbolos
 	for (_symbol of arrWl) {
@@ -21,32 +24,10 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 		// Es regex
 		if (typeof fnc === "object") {
 			
+			isRegex = true;
 			let regex = new RegExp(fnc);
-			let rest = string.replace(regex, ""); // quito todo lo que concuerde con el regex
+			rest = rest.replace(regex, ""); // quito todo lo que concuerde con el regex
 			
-			
-			// Si todavía queda algo, es que hay algo mal
-			if (rest !== "") {
-				
-				let error = errorMessagesObj.wl.base;
-				let maxIdx = arrWl.length - 1;
-				
-				
-				arrWl.forEach( (_x, idx) => {
-					
-					if (idx === maxIdx && maxIdx > 0) error += `${errorMessagesObj.wl.and}`; // último separador: "y" en lugar de ","
-					
-					error += errorMessagesObj.wl[_x];
-					
-					if (idx < maxIdx - 1) error += ", "; // separador
-					if (idx === maxIdx) error += "."; // punto final
-					
-				});
-				
-				
-				return error;
-				
-			};
 		};
 		
 		
@@ -59,6 +40,33 @@ module.exports = (symbolToFnc, errorMessagesObj, string, strCodes) => {
 			
 		};
 		
+	};
+	
+	
+	
+	if (isRegex) {
+		
+		if (rest !== "") { // Si todavía queda algo, es que hay algo mal
+			
+			let error = errorMessagesObj.wl.itsOnlyAllowed;
+			let maxIdx = arrWl.length - 1;
+			
+			
+			arrWl.forEach( (_x, idx) => {
+				
+				if (idx === maxIdx && maxIdx > 0) error += `${errorMessagesObj.wl.and}`; // último separador: "y" en lugar de ","
+				
+				error += errorMessagesObj.wl[_x];
+				
+				if (idx < maxIdx - 1) error += ", "; // separador
+				if (idx === maxIdx) error += "."; // punto final
+				
+			});
+			
+			
+			return error;
+			
+		};
 	};
 	
 	
