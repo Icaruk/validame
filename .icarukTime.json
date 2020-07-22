@@ -1,20 +1,21 @@
 {
-    "idleHeartbeats": 7961,
-    "navigatingHeartbeats": 5989,
-    "totalCodingHeartbeats": 29679,
+    "idleHeartbeats": 8003,
+    "navigatingHeartbeats": 6025,
+    "totalCodingHeartbeats": 29800,
     "languageHeartbeats": {
         "jsonc": 36,
         "javascript": 20746,
-        "json": 355,
+        "json": 385,
         "code-runner-output": 1059,
         "markdown": 7247,
-        "scminput": 73,
-        "plaintext": 163
+        "scminput": 116,
+        "plaintext": 163,
+        "ignore": 48
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 10,
         "index.js": 6518,
-        "package.json": 355,
+        "package.json": 385,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
@@ -27,7 +28,7 @@
         "validations/req.js": 587,
         "Untitled-1": 393,
         "utils/strToRegex.js": 46,
-        "scm\\git\\scm0\\input": 73,
+        "scm\\git\\scm0\\input": 116,
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\keybindings.json": 26,
         "fnc.js": 89,
         "validations/wl.js": 3407,
@@ -48,6 +49,7 @@
         "playground.js": 1250,
         "playground2.js": 146,
         "examples/addCustomSymbol.js": 109,
-        "examples/addCustomRule.js": 60
+        "examples/addCustomRule.js": 60,
+        ".gitignore": 48
     }
 }
