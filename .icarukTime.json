@@ -1,21 +1,21 @@
 {
-    "idleHeartbeats": 8003,
-    "navigatingHeartbeats": 6025,
-    "totalCodingHeartbeats": 29800,
+    "idleHeartbeats": 8032,
+    "navigatingHeartbeats": 6057,
+    "totalCodingHeartbeats": 29840,
     "languageHeartbeats": {
         "jsonc": 36,
         "javascript": 20746,
-        "json": 385,
+        "json": 415,
         "code-runner-output": 1059,
         "markdown": 7247,
         "scminput": 116,
         "plaintext": 163,
-        "ignore": 48
+        "ignore": 58
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 10,
         "index.js": 6518,
-        "package.json": 385,
+        "package.json": 415,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
@@ -50,6 +50,6 @@
         "playground2.js": 146,
         "examples/addCustomSymbol.js": 109,
         "examples/addCustomRule.js": 60,
-        ".gitignore": 48
+        ".gitignore": 58
     }
 }
