@@ -1,13 +1,13 @@
 {
-    "idleHeartbeats": 8032,
-    "navigatingHeartbeats": 6057,
-    "totalCodingHeartbeats": 29840,
+    "idleHeartbeats": 8120,
+    "navigatingHeartbeats": 6105,
+    "totalCodingHeartbeats": 29964,
     "languageHeartbeats": {
         "jsonc": 36,
         "javascript": 20746,
-        "json": 415,
+        "json": 487,
         "code-runner-output": 1059,
-        "markdown": 7247,
+        "markdown": 7299,
         "scminput": 116,
         "plaintext": 163,
         "ignore": 58
@@ -15,7 +15,7 @@
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 10,
         "index.js": 6518,
-        "package.json": 415,
+        "package.json": 487,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
@@ -24,7 +24,7 @@
         "extension-output-#12": 280,
         "utils/multiReplace.js": 53,
         "test2.js": 1197,
-        "README.md": 7247,
+        "README.md": 7299,
         "validations/req.js": 587,
         "Untitled-1": 393,
         "utils/strToRegex.js": 46,
