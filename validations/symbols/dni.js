@@ -1,12 +1,12 @@
 
-exports.dni = (errorMessagesObj, string) => {
+exports.dni = (stringParaValidar, config) => {
 	
 	// *******************
 	// Compruebo estructura
 	// *******************
 	
 	let regex = new RegExp(/^[XYZ]?[0-9]{5,8}[A-Z]$/, "");
-	let correcto = regex.test(string);
+	let correcto = regex.test(stringParaValidar);
 	
 	if (! correcto) {
 		return errorMessagesObj.wl.dni.structure;
@@ -18,9 +18,9 @@ exports.dni = (errorMessagesObj, string) => {
 	// Compruebo letra
 	// *******************
 	
-	let dni = string; // copio el string
+	let dni = stringParaValidar; // copio el string
 	
-	if (isNaN( parseInt(string[0]) )) {// el primer dígito es una letra
+	if (isNaN( parseInt(stringParaValidar[0]) )) {// el primer dígito es una letra
 		
 		// Sustituyo las letras XYZ por 012, respectivamente
 		dni = dni.replace("X", 0);
@@ -28,7 +28,7 @@ exports.dni = (errorMessagesObj, string) => {
 		dni = dni.replace("Z", 2);
 	};
 	
-	let length = string.length;
+	let length = stringParaValidar.length;
 	let cifra = dni.slice(0, length - 1); 			// (12345678) Z
 	let letra = dni.substr(length - 1, length); 	// 12345678 (Z)
 	

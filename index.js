@@ -129,8 +129,8 @@ const options = {
 		"min": require("./validations/min"),
 		"max": require("./validations/max"),
 		"minmax": require("./validations/minmax"),
-		"req": require("./validations/req"),
-		"wl": require("./validations/wl"),
+		"req": require("./validations/rules/req"),
+		"wl": require("./validations/rules/allow"),
 		
 	},
 	
@@ -143,12 +143,12 @@ const options = {
 		"ñ": /[ñáéíóú]/g,
 		"Ñ": /[ÑÁÉÍÓÚ]/g,
 		
-		"phoneEs": require("./validations/phone").phoneEs,
-		"mobileEs": require("./validations/phone").mobileEs,
-		"dni": require("./validations/dni").dni,
-		"ibanEs": require("./validations/iban").ibanEs,
-		"email": require("./validations/email").email,
-		"postalCodeEs": require("./validations/postalCode").postalCodeEs,
+		"phoneEs": require("./validations/symbols/phone").phoneEs,
+		"mobileEs": require("./validations/symbols/phone").mobileEs,
+		"dni": require("./validations/symbols/dni").dni,
+		"ibanEs": require("./validations/symbols/iban").ibanEs,
+		"email": require("./validations/symbols/email").email,
+		"postalCodeEs": require("./validations/symbols/postalCode").postalCodeEs,
 		
 	},
 	
@@ -158,9 +158,10 @@ const options = {
 
 /**
  * Validates a string.
+ * https://www.npmjs.com/package/validame
  * ___
  * 
- * @param {string} string - String to validate.
+ * @param {string} stringParaValidar - String to validate.
  * @param {object} rules - Object that contains a list with one or more rules.
  * 
  * ___
@@ -169,43 +170,25 @@ const options = {
  * 
 */
 
-const validation = (string = "", rules = {}) => {
+const validation = (stringParaValidar = "", rules) => {
 	
-	// if (string === "") return "";
-	
+	let configRules = config.rules;
 	let error = "";
 	
 	
-	// Recorro las reglas
+	
+	// Recorro las propiedades del param rules
 	for (const [key, value] of Object.entries(rules)) {
 		
 		// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
-		let fnc = options.ruleToFnc[key];
-		
+		const fnc = configRules[key].fnc;
 		
 		
 		if (fnc) {
-			
-			// Obtengo el string de mensaje de error
-			let errorMessagesArr = options.messages[options.language][key];
-			
-			
-			if (key === "wl") {
-				
-				// Aquí llamo a la función wl con los parámetros que necesita
-				error = fnc(options.symbolToFnc, options.messages[options.language], string, value);
-				
-			} else {
-				
-				// Aquí llamo a la función req, min, max...
-				error = fnc(errorMessagesArr, string, value);
-				
-			};
-			
-			
-			if (error !== "") return error;
-			
+			error = fnc(stringParaValidar, value, config);
 		};
+		
+		if (error) break;
 		
 	};
 	
@@ -225,32 +208,205 @@ const utils = {
 
 
 
-class Validame {
+// class Validame {
 	
-	instance = null;
+// 	instance = null;
 	
 	
-	constructor () {
+// 	constructor () {
 		
-		this.o = options;
-		this.v = validation;
-		this.u = utils;
-		
-		
-		if (this.instance) {
-			return this.instance;
-		};
+// 		this.o = options;
+// 		this.v = validation;
+// 		this.u = utils;
 		
 		
-		this.instance = this;
-		return this;
+// 		if (this.instance) {
+// 			return this.instance;
+// 		};
 		
-	};
+		
+// 		this.instance = this;
+// 		return this;
+		
+// 	};
+	
+// };
+
+
+
+let config = {
+	
+	language: "en", // es, en, fr
+	
+	symbols: {
+		
+		"a": {
+			regex: /[a-z]/g,
+			name: {
+				es: "minúsculas",
+				en: "lowercase",
+			}
+		},
+		"A": {
+			regex: /[A-Z]/g,
+			name: {
+				es: "mayúsculas",
+				en: "uppercase",
+			}
+		},
+		"aA": {
+			regex: /[a-z]/gi,
+			name: {
+				es: "letras",
+				en: "letters",
+			}
+		},
+		"1": {
+			regex: /[0-9]/g,
+			name: {
+				es: "números",
+				en: "numbers",
+			}
+		},
+		"_": {
+			regex: /\s/g,
+			name: {
+				es: "espacios",
+				en: "spaces",
+			}
+		},
+		"!": {
+			regex: /[ºª\\!\|"@·#€\$%&¬\/\(\)=\?'¿¡\^`\[\+\]´,{}\-_<>~]/g,
+			name: {
+				es: "caracteres especiales",
+				en: "special characters",
+			}
+		},
+		"ñ": {
+			regex: /[ñáéíóú]/g,
+			name: {
+				es: "tildes y ñ",
+				en: "accents and ñ",
+			}
+		},
+		"Ñ": {
+			regex: /[ÑÁÉÍÓÚ]/g,
+			name: {
+				es: "tildes y Ñ",
+				en: "accents and Ñ",
+			}
+		},
+		"ñÑ": {
+			regex: /[ñáéíóú]/gi,
+			name: {
+				es: "tildes, ñ y Ñ",
+				en: "accents, ñ and Ñ",
+			}
+		},
+		
+		
+		// "phoneEs": require("./validations/symbols/phone").phoneEs,
+		// "mobileEs": require("./validations/symbols/phone").mobileEs,
+		// "dni": require("./validations/symbols/dni").dni,
+		// "ibanEs": require("./validations/symbols/iban").ibanEs,
+		// "email": require("./validations/symbols/email").email,
+		// "postalCodeEs": require("./validations/symbols/postalCode").postalCodeEs,
+		
+		
+	},
+	
+	rules: {
+		
+		allow: {
+			fnc: require("./validations/allow"),
+			messages: {
+				itsOnlyAllowed: {
+					es: "Sólo se permite: ",
+					en: "",
+				},
+				and: {
+					es: " y ",
+					en: " and ",
+				}
+			},
+			symbol: {
+								
+			}
+		},
+		
+		min: {
+			fnc: require("./validations/min"),
+			messages: {
+				error: {
+					es: "Debería tener _%1 caracteres como mínimo pero tiene _%2.",
+					en: "It should have _%1 minimum characters but it has _%2.",
+				}
+			},
+		},
+		
+		max: {
+			fnc: require("./validations/max"),
+			messages: {
+				error: {
+					es: "Debería tener _%1 caracteres como máximo pero tiene _%2.",
+					en: "It should have _%1 maximum characters but it has _%2.",
+				}
+			}
+		},
+		
+		minMax: {
+			fnc: require("./validations/minMax"),
+			messages: {
+				error: {
+					es: "Debería tener _%1 caracteres pero tiene _%2.",
+					en: "It should have _%1 characters but it has _%2.",
+				}				
+			}
+		},
+		
+		req: {
+			fnc: require("./validations/rules/req"),
+			messages: {
+				error: {
+					es: "No puede estar vacío",
+					en: "It can't be empty",
+				}
+			}
+		},
+		
+		disallow: {
+			fnc: "",
+			messages: {
+				error: {
+					es: "",
+					en: "",
+				}
+			}
+		},
+		
+	},
+	
+	
+	
 	
 };
 
 
 
-module.exports = new Validame();
+// let validame = {
+// 	config: config,
+	
+// 	options: options,
+// 	v: validation,
+// 	utils: utils,
+// };
+
+
+
+module.exports = {
+	validame: validation,
+	validameConfig: config,
+	validameUtils: utils,
+};
 
 

@@ -1,21 +1,21 @@
 
 // Import
-const validame = require("./index");
+const {validame, validameConfig, validameUtils} = require("./index");
 
 
 
-module.exports = () => {
-	
-	let error = validame.v("Austin", {
-		wl: "startWithVowel",
-	});
-	
-	if (error === "") {
-		console.log( "playground2 ✅" );
-	} else {
-		console.log("playground2 ❌", error );
-	};
-	
+let error = validame("pepe12", {
+	// req: 1,
+	// min: 3,
+	// max: 4,
+	// minMax: 3,
+	allow: "a",
+});
+
+if (error === "") {
+	console.log( "playground2 ✅" );
+} else {
+	console.log("playground2 ❌", error );
 };
 
 
