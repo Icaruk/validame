@@ -1,20 +1,21 @@
 {
-    "idleHeartbeats": 10158,
-    "navigatingHeartbeats": 6771,
-    "totalCodingHeartbeats": 34656,
+    "idleHeartbeats": 12157,
+    "navigatingHeartbeats": 7256,
+    "totalCodingHeartbeats": 36479,
     "languageHeartbeats": {
         "jsonc": 153,
-        "javascript": 25183,
+        "javascript": 26754,
         "json": 487,
-        "code-runner-output": 1197,
+        "code-runner-output": 1403,
         "markdown": 7299,
         "scminput": 116,
         "plaintext": 163,
-        "ignore": 58
+        "ignore": 58,
+        "http": 46
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 127,
-        "index.js": 9449,
+        "index.js": 9652,
         "package.json": 487,
         "extension-output-#9": 779,
         "test.js": 2017,
@@ -47,11 +48,14 @@
         "tests/dni.js": 207,
         "tests/dni.test.js": 13,
         "playground.js": 1250,
-        "playground2.js": 528,
+        "playground2.js": 910,
         "examples/addCustomSymbol.js": 109,
         "examples/addCustomRule.js": 60,
         ".gitignore": 58,
         "extension-output-#14": 45,
-        "extension-output-#15": 93
+        "extension-output-#15": 299,
+        "validations/rules/allow.js": 721,
+        "f:\\Programación\\Economos\\b-economos\\api.REST": 46,
+        "validations/rules/only.js": 265
     }
 }

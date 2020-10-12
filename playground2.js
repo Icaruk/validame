@@ -4,12 +4,12 @@ const {validame, validameConfig, validameUtils} = require("./index");
 
 
 
-let error = validame("pepe12", {
+let error = validame("asd ñ", {
 	// req: 1,
 	// min: 3,
 	// max: 4,
 	// minMax: 3,
-	allow: "a",
+	allow: "a A 1 _ ñ",
 });
 
 if (error === "") {

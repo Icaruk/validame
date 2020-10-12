@@ -1,5 +1,5 @@
 
-const multiReplace = require("../utils/multiReplace");
+const multiReplace = require("../../utils/multiReplace");
 
 
 

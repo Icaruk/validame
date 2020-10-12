@@ -1,8 +1,8 @@
 
-module.exports = (stringParaValidar, strAllow, config) => {
+module.exports = (stringParaValidar, strMust, config) => {
 	
 	if (! stringParaValidar) stringParaValidar = "";
-	let arrWl = strAllow.split(" "); // "a A 1" → ["a", "A", "1"]
+	let arrWl = strMust.split(" "); // "a A 1" → ["a", "A", "1"]
 	
 	
 	let rest = stringParaValidar // para el modo objeto
@@ -45,7 +45,7 @@ module.exports = (stringParaValidar, strAllow, config) => {
 		
 		if (rest !== "") { // Si todavía queda algo, es que hay algo mal
 			
-			let error = config.rules.allow.messages.itsOnlyAllowed[config.language];
+			let error = config.rules.only.messages.only[config.language];
 			let maxIdx = arrWl.length - 1;
 			
 			

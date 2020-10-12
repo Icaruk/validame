@@ -124,15 +124,15 @@ const options = {
 		
 	},
 	
-	ruleToFnc: {
+	// ruleToFnc: {
 		
-		"min": require("./validations/min"),
-		"max": require("./validations/max"),
-		"minmax": require("./validations/minmax"),
-		"req": require("./validations/rules/req"),
-		"wl": require("./validations/rules/allow"),
+	// 	"min": require("./validations/min"),
+	// 	"max": require("./validations/max"),
+	// 	"minmax": require("./validations/minmax"),
+	// 	"req": require("./validations/rules/req"),
+	// 	"wl": require("./validations/rules/allow"),
 		
-	},
+	// },
 	
 	symbolToFnc: {
 		"a": /[a-z]/g,
@@ -318,24 +318,34 @@ let config = {
 	rules: {
 		
 		allow: {
-			fnc: require("./validations/allow"),
+			fnc: require("./validations/rules/allow"),
 			messages: {
 				itsOnlyAllowed: {
 					es: "Sólo se permite: ",
-					en: "",
+					en: "It's only allowed: ",
 				},
 				and: {
 					es: " y ",
 					en: " and ",
 				}
 			},
-			symbol: {
-								
-			}
 		},
+		// only: {
+		// 	fnc: require("./validations/rules/only"),
+		// 	messages: {
+		// 		only: {
+		// 			es: "Sólo puede tener: ",
+		// 			en: "It can only have: ",
+		// 		},
+		// 		and: {
+		// 			es: " y ",
+		// 			en: " and ",
+		// 		}
+		// 	},
+		// },
 		
 		min: {
-			fnc: require("./validations/min"),
+			fnc: require("./validations/rules/min"),
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres como mínimo pero tiene _%2.",
@@ -345,7 +355,7 @@ let config = {
 		},
 		
 		max: {
-			fnc: require("./validations/max"),
+			fnc: require("./validations/rules/max"),
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres como máximo pero tiene _%2.",
@@ -355,7 +365,7 @@ let config = {
 		},
 		
 		minMax: {
-			fnc: require("./validations/minMax"),
+			fnc: require("./validations/rules/minMax"),
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres pero tiene _%2.",
