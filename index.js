@@ -155,6 +155,19 @@ const options = {
 };
 
 
+/**
+ * @typedef Rules
+ * @property {0 | 1 | 2} req Required:
+ * - 0: disabled
+ * - 1: allows null but fails with ""
+ * - 2: fails with null and ""
+ * 
+ * @property {number} min Number of minimum characters.
+ * @property {number} max Number of maximum characters.
+ * @property {number} minMax Number of exact characters.
+ * @property {string} allow Symbols to allow. Example: "a 1 _"
+*/
+
 
 /**
  * Validates a string.
@@ -162,7 +175,7 @@ const options = {
  * ___
  * 
  * @param {string} stringParaValidar - String to validate.
- * @param {object} rules - Object that contains a list with one or more rules.
+ * @param {Rules} rules - Object that contains a list with one or more rules.
  * 
  * ___
  * 

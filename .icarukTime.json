@@ -1,10 +1,10 @@
 {
-    "idleHeartbeats": 12157,
-    "navigatingHeartbeats": 7256,
-    "totalCodingHeartbeats": 36479,
+    "idleHeartbeats": 12194,
+    "navigatingHeartbeats": 7263,
+    "totalCodingHeartbeats": 36909,
     "languageHeartbeats": {
         "jsonc": 153,
-        "javascript": 26754,
+        "javascript": 27184,
         "json": 487,
         "code-runner-output": 1403,
         "markdown": 7299,
@@ -48,7 +48,7 @@
         "tests/dni.js": 207,
         "tests/dni.test.js": 13,
         "playground.js": 1250,
-        "playground2.js": 910,
+        "playground2.js": 1278,
         "examples/addCustomSymbol.js": 109,
         "examples/addCustomRule.js": 60,
         ".gitignore": 58,
@@ -56,6 +56,6 @@
         "extension-output-#15": 299,
         "validations/rules/allow.js": 721,
         "f:\\Programación\\Economos\\b-economos\\api.REST": 46,
-        "validations/rules/only.js": 265
+        "validations/rules/only.js": 327
     }
 }
