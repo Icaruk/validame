@@ -6,18 +6,6 @@ const options = {
 	messages: {
 		
 		es: {
-			min: {
-				"min": "Debería tener _%1 caracteres como mínimo pero tiene _%2."
-			},
-			max: {
-				"max": "Debería tener _%1 caracteres como máximo pero tiene _%2."
-			},
-			minmax: {
-				"minmax": "Debería tener _%1 caracteres pero tiene _%2."
-			},
-			req: {
-				"cantBeEmpty": "No puede estar vacío."
-			},
 			wl: {
 				"itsOnlyAllowed": "Sólo se permite: ",
 				"and": " y ",
@@ -66,18 +54,6 @@ const options = {
 		},
 		
 		en: {
-			min: {
-				"min": "It should have _%1 minimum characters but it has _%2."
-			},
-			max: {
-				"max": "It should have _%1 maximum characters but it has _%2."
-			},
-			minmax: {
-				"minmax": "It should have _%1 characters but it has _%2."
-			},
-			req: {
-				"cantBeEmpty": "It can't be empty."
-			},
 			wl: {
 				"itsOnlyAllowed": "It's only allowed: ",
 				"and": " and ",
@@ -133,26 +109,9 @@ const options = {
 	// 	"wl": require("./validations/rules/allow"),
 		
 	// },
-	
-	symbolToFnc: {
-		"a": /[a-z]/g,
-		"A": /[A-Z]/g,
-		"1": /[0-9]/g,
-		"_": /\s/g,
-		"!": /[ºª\\!\|"@·#€\$%&¬\/\(\)=\?'¿¡\^`\[\+\]´,{}\-_<>~]/g,
-		"ñ": /[ñáéíóú]/g,
-		"Ñ": /[ÑÁÉÍÓÚ]/g,
 		
-		"phoneEs": require("./validations/symbols/phone").phoneEs,
-		"mobileEs": require("./validations/symbols/phone").mobileEs,
-		"dni": require("./validations/symbols/dni").dni,
-		"ibanEs": require("./validations/symbols/iban").ibanEs,
-		"email": require("./validations/symbols/email").email,
-		"postalCodeEs": require("./validations/symbols/postalCode").postalCodeEs,
-		
-	},
-	
 };
+
 
 
 /**
@@ -165,8 +124,17 @@ const options = {
  * @property {number} min Number of minimum characters.
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
- * @property {string} allow Symbols to allow. Example: "a 1 _"
+ * @property {Symbols} allow Symbols to allow. Example: "a 1 _"
 */
+
+
+
+/**
+ * @typedef Symbols
+ * @enum {string} a Lowercase
+ * @enum {string} A Uppercase
+*/
+
 
 
 /**
@@ -194,14 +162,21 @@ const validation = (stringParaValidar = "", rules) => {
 	for (const [key, value] of Object.entries(rules)) {
 		
 		// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
-		const fnc = configRules[key].fnc;
 		
+		if (configRules[key] !== undefined) {
+			
+			const fnc = configRules[key].fnc;
+			
+			
+			if (fnc) {
+				error = fnc(stringParaValidar, value, config);
+			};
+			
+			if (error) break;
 		
-		if (fnc) {
-			error = fnc(stringParaValidar, value, config);
+		} else {
+			console.log(`Validame error: rule ${key} not found`);
 		};
-		
-		if (error) break;
 		
 	};
 	
@@ -218,32 +193,6 @@ const validation = (stringParaValidar = "", rules) => {
 const utils = {
 	multiReplace: require("./utils/multiReplace"),
 };
-
-
-
-// class Validame {
-	
-// 	instance = null;
-	
-	
-// 	constructor () {
-		
-// 		this.o = options;
-// 		this.v = validation;
-// 		this.u = utils;
-		
-		
-// 		if (this.instance) {
-// 			return this.instance;
-// 		};
-		
-		
-// 		this.instance = this;
-// 		return this;
-		
-// 	};
-	
-// };
 
 
 
@@ -316,10 +265,71 @@ let config = {
 				en: "accents, ñ and Ñ",
 			}
 		},
+		"phoneEs": {
+			regex: require("./validations/symbols/phone").phoneEs,
+			invalid: {
+				es: "No es un teléfono español válido",
+				en: "It isn't a valid spanish phone",
+			},
+			digits: {
+				es: "Debe tener 9 dígitos",
+				en: "It must have 9 digits",
+			}
+		},
+		"mobileEs": {
+			regex: require("./validations/symbols/phone").mobileEs,
+			invalid: {
+				es: "No es un móvil español válido",
+				en: "It isn't a valid spanish mobile",
+			},
+			digits: {
+				es: "Debe tener 9 dígitos",
+				en: "It must have 9 digits",
+			}
+		},
+		"dni": {
+			regex: require("./validations/symbols/dni").dni,
+			invalid: {
+				es: "No es un DNI válido",
+				en: "It isn't a valid DNI",
+			},
+			finalLetter: {
+				es: "La letra final es inválida",
+				en: "The last letter is invalid",
+			}
+		},
+		"email": {
+			regex: require("./validations/symbols/email").email,
+			invalid: {
+				es: "No es un email válido",
+				en: "It isn't a valid email",
+			}
+		},
+		"ibanEs": {
+			regex: require("./validations/symbols/iban").ibanEs,
+			invalid: {
+				es: "No es un IBAN válido",
+				en: "It isn't a valid IBAN",
+			},
+			structure: {
+				es: "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890",
+				en: "It must follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
+			}
+		},
+		"postalCodeEs": {
+			regex: require("./validations/symbols/postalCode").postalCodeEs,
+			invalid: {
+				es: "No es válido",
+				en: "It isn't valid",
+			},
+			digits: {
+				es: "Debe tener 5 dígitos",
+				en: "It must have 5 digits",
+			}
+		},
 		
 		
-		// "phoneEs": require("./validations/symbols/phone").phoneEs,
-		// "mobileEs": require("./validations/symbols/phone").mobileEs,
+		
 		// "dni": require("./validations/symbols/dni").dni,
 		// "ibanEs": require("./validations/symbols/iban").ibanEs,
 		// "email": require("./validations/symbols/email").email,

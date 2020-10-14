@@ -1,12 +1,12 @@
 
-const validame = require("../index");
+const {validame, validameConfig, validameUtils} = require("../index");
 
 
-describe("Longitud", () => {
+describe("req", () => {
 	
 	test("req 0 text", () => {
 		expect(
-			validame.v("asdf", {
+			validame("asdf", {
 				req: 0
 			})
 		).toBe("");
@@ -14,7 +14,7 @@ describe("Longitud", () => {
 	
 	test("req 0 empty", () => {
 		expect(
-			validame.v("", {
+			validame("", {
 				req: 0
 			})
 		).toBe("");
@@ -22,7 +22,7 @@ describe("Longitud", () => {
 	
 	test("req 0 null", () => {
 		expect(
-			validame.v(null, {
+			validame(null, {
 				req: 0
 			})
 		).toBe("");
@@ -32,7 +32,7 @@ describe("Longitud", () => {
 	
 	test("req 1 text", () => {
 		expect(
-			validame.v("asdf", {
+			validame("asdf", {
 				req: 1
 			})
 		).toBe("");
@@ -40,7 +40,7 @@ describe("Longitud", () => {
 	
 	test("req 1 empty", () => {
 		expect(
-			validame.v("", {
+			validame("", {
 				req: 1
 			})
 		).not.toBe("");
@@ -48,7 +48,7 @@ describe("Longitud", () => {
 	
 	test("req 1 null", () => {
 		expect(
-			validame.v(null, {
+			validame(null, {
 				req: 1
 			})
 		).toBe("");
@@ -58,7 +58,7 @@ describe("Longitud", () => {
 	
 	test("req 2 text", () => {
 		expect(
-			validame.v("asdf", {
+			validame("asdf", {
 				req: 2
 			})
 		).toBe("");
@@ -66,7 +66,7 @@ describe("Longitud", () => {
 	
 	test("req 2 empty", () => {
 		expect(
-			validame.v("", {
+			validame("", {
 				req: 2
 			})
 		).not.toBe("");
@@ -74,7 +74,7 @@ describe("Longitud", () => {
 	
 	test("req 2 null", () => {
 		expect(
-			validame.v(null, {
+			validame(null, {
 				req: 2
 			})
 		).not.toBe("");

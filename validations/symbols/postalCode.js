@@ -1,11 +1,11 @@
 
-exports.postalCodeEs = (errorMessagesObj, string) => {
+exports.postalCodeEs = (stringParaValidar, config) => {
 	
 	// *******************
 	// Compruebo longitud
 	// *******************
 	
-	if (string.length !== 5) return errorMessagesObj.wl.postalCode["5numbers"];
+	if (stringParaValidar.length !== 5) return config.symbols.postalCodeEs.digits[config.language];
 	
 	
 	
@@ -14,12 +14,12 @@ exports.postalCodeEs = (errorMessagesObj, string) => {
 	// *******************
 	
 	let regex = new RegExp(/\d/, "");
-	let correcto1 = regex.test(string);
-	if (! correcto1) return errorMessagesObj.wl.postalCode.onlyNumbers;
+	let correcto1 = regex.test(stringParaValidar);
+	if (! correcto1) return config.symbols.postalCodeEs.invalid[config.language];
 	
 	regex = new RegExp(/^(?:0?[1-9]|[1-4]\d|5[0-2])\d{3}$/, "");
-	let correcto2 = regex.test(string);
-	if (! correcto2) return errorMessagesObj.wl.postalCode.notValid;
+	let correcto2 = regex.test(stringParaValidar);
+	if (! correcto2) return config.symbols.postalCodeEs.invalid[config.language];
 	
 	
 	return "";

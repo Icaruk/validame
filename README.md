@@ -22,7 +22,7 @@
 # ⬇️ Import
 
 ```js
-const validame = require("validame");
+const {validame} = require("validame");
 ```
 
 
@@ -35,7 +35,7 @@ const validame = require("validame");
 
 ```js
 
-let error = validame.v("Dog", {
+let error = validame("Dog", {
 	min: 4,
 });
 
@@ -45,7 +45,7 @@ let error = validame.v("Dog", {
 
 ```js
 
-let error = validame.v("Dog", {
+let error = validame("Dog", {
 	min: 2,
 	max: 4
 });
@@ -56,8 +56,8 @@ let error = validame.v("Dog", {
 
 ```js
 
-let error = validame.v("My name is Mike", {
-	wl: "1"
+let error = validame("My name is Mike", {
+	allow: "1"
 });
 
 // error = "It's only allowed: numbers."
@@ -66,8 +66,8 @@ let error = validame.v("My name is Mike", {
 
 ```js
 
-let error = validame.v("My name is Mike", {
-	wl: "a 1"
+let error = validame("My name is Mike", {
+	allow: "a 1"
 });
 
 // error = "It's only allowed: lowercase and numbers."
@@ -76,8 +76,8 @@ let error = validame.v("My name is Mike", {
 
 ```js
 
-let error = validame.v("My name is Mike", {
-	wl: "a A"
+let error = validame("My name is Mike", {
+	allow: "a A"
 });
 
 // error = "It's only allowed: lowercase and uppercase."
@@ -86,10 +86,10 @@ let error = validame.v("My name is Mike", {
 
 ```js
 
-let error = validame.v("My name is Mike", {
+let error = validame("My name is Mike", {
 	min: 4,
 	max: 16,
-	wl: "a A _"
+	allow: "a A _"
 });
 
 // error = ""
@@ -107,7 +107,7 @@ let error = validame.v("My name is Mike", {
 **Returns** an empty string if the validation is correct, otherwise it returns an string explaining the error.
 
 ```js
-validame.v (stringToValidate, rules);
+validame (stringToValidate, rules);
 ```
 
 - **stringToValidate** (string):
@@ -125,7 +125,7 @@ validame.v (stringToValidate, rules);
 	max: 10,
 	
 	// Exact number of characters
-	minmax: 5,
+	minMax: 5,
 	
 	// 0: Empty string or null will return "" (OK).
 	// 1: Empty string will return "" (OK) but null will return an error.
@@ -133,7 +133,7 @@ validame.v (stringToValidate, rules);
 	req: 1,
 	
 	// (Explained below) Contains a list of symbols separated with a space.
-	wl: "a A _ 1",
+	allow: "a A _ 1",
 	
 }
 ```
@@ -153,10 +153,10 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-## 🏳️ Whitelist (wl) rule:
+## 🏳️ Allow (allow) rule:
 
 - The symbol list must be **separated with a space**, example: `a A _ !`.
-- If stringToValidate contains one or more characters **outside the whitelist** it will return an error.
+- If stringToValidate contains one or more characters **outside the allow list** it will return an error.
 - The validation is done from **left to right**.
 - Each symbol has a **regex or function** associated.
 - Built-in symbols and their associations:
@@ -213,6 +213,7 @@ At the moment the possible options are:
 
 
 <br>
+
 #### 🧾 Property messages
 
 `validame.o.messages`
@@ -223,7 +224,7 @@ This property contains all the error messages given. The object has the followin
 languageCode: {
 	rule1: "Your error message here",
 	rule2: "Your error message here",
-	wl: {
+	allow: {
 		regexSymbol1: "Your error message here",
 		regexSymbol2: "Your error message here",
 		functionSymbol1: "Your error message here",
@@ -248,7 +249,7 @@ Currently `validame.o.messages.en` contains:
 	req: {
 		"cantBeEmpty": "It can't be empty."
 	},
-	wl: {
+	allow: {
 		"itsOnlyAllowed": "It's only allowed: ",
 		"and": " and ",
 		"a": "lowercase",
@@ -336,13 +337,13 @@ validame.o.messages.es.wl.startWithVowel = "vocal inicial"; // To build → Sól
 
 
 // And you can use it now:
-let error = validame.v("Adrian", {
-	wl: "startWithVowel",
+let error = validame("Adrian", {
+	allow: "startWithVowel",
 });
 // error = ""
 
-let error = validame.v("Mike", {
-	wl: "startWithVowel",
+let error = validame("Mike", {
+	allow: "startWithVowel",
 });
 // error = "It's only allowed: initial vowel"
 
@@ -387,13 +388,13 @@ validame.o.symbolToFnc.over18 = (errorMessagesObj, stringToValidate) => {
 
 
 // And you can use it now:
-let error = validame.v("19", {
-	wl: "over18",
+let error = validame("19", {
+	allow: "over18",
 });
 // error = ""
 
-let error = validame.v("17", {
-	wl: "over18",
+let error = validame("17", {
+	allow: "over18",
 });
 // error = "It must be over 18"
 
@@ -467,12 +468,12 @@ validame.o.ruleToFnc.upperAndLower = (errorMessagesObj, stringToValidate, valueG
 
 
 // And you can use it now:
-let error = validame.v("mike", {
+let error = validame("mike", {
 	upperAndLower: [1, 2],
 });
 // error = "It must have at least 1 uppercase and 2 lowercase characters"
 
-let error = validame.v("Mike", {
+let error = validame("Mike", {
 	upperAndLower: [1, 2],
 });
 // error = ""
@@ -490,10 +491,10 @@ let error = validame.v("Mike", {
 
 ```js
 
-let error = validame.v("Name SurnameOne SurnameTwo", {
+let error = validame("Name SurnameOne SurnameTwo", {
 	min: 4,
 	max: 64,
-	wl: "a A _"
+	allow: "a A _"
 });
 
 // error = ""
@@ -501,9 +502,9 @@ let error = validame.v("Name SurnameOne SurnameTwo", {
 
 ```js
 
-let error = validame.v("600123456", {
+let error = validame("600123456", {
 	req: 1,
-	wl: "phoneEs"
+	allow: "phoneEs"
 });
 
 // error = ""
@@ -511,11 +512,11 @@ let error = validame.v("600123456", {
 
 ```js
 
-let error = validame.v("", {
+let error = validame("", {
 	req: 1,
 	min: 4,
 	max: 64,
-	wl: "a A"
+	allow: "a A"
 });
 
 // error = "It can't be empty."
@@ -523,11 +524,11 @@ let error = validame.v("", {
 
 ```js
 
-let error = validame.v("", {
+let error = validame("", {
 	req: 2,
 	min: 4,
 	max: 64,
-	wl: "a A"
+	allow: "a A"
 });
 
 // error = "It can't be empty."
@@ -535,11 +536,11 @@ let error = validame.v("", {
 
 ```js
 
-let error = validame.v(null, {
+let error = validame(null, {
 	req: 1,
 	min: 4,
 	max: 64,
-	wl: "a A"
+	allow: "a A"
 });
 
 // error = "It should have 4 minimum characters but it has 0."
@@ -547,11 +548,11 @@ let error = validame.v(null, {
 
 ```js
 
-let error = validame.v(null, {
+let error = validame(null, {
 	req: 2,
 	min: 4,
 	max: 64,
-	wl: "a A"
+	allow: "a A"
 });
 
 // error = "It can't be empty."

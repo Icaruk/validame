@@ -1,12 +1,12 @@
 
-const validame = require("../index");
+const {validame, validameConfig, validameUtils} = require("../index");
 
 
 describe("Longitud", () => {
 	
 	test("3-5", () => {
 		expect(
-			validame.v("hola", {
+			validame("hola", {
 				min: 3,
 				max: 5
 			})
@@ -15,7 +15,7 @@ describe("Longitud", () => {
 	
 	test("3-5 fail min", () => {
 		expect(
-			validame.v("ho", {
+			validame("ho", {
 				min: 3,
 				max: 5
 			})
@@ -24,7 +24,7 @@ describe("Longitud", () => {
 	
 	test("3-5 fail max", () => {
 		expect(
-			validame.v("holahola", {
+			validame("holahola", {
 				min: 3,
 				max: 5
 			})
@@ -35,16 +35,16 @@ describe("Longitud", () => {
 	
 	test("4 minmax", () => {
 		expect(
-			validame.v("hola", {
-				minmax: 4,
+			validame("hola", {
+				minMax: 4,
 			})
 		).toBe("");
 	});
 	
 	test("4 minmax fail", () => {
 		expect(
-			validame.v("holaa", {
-				minmax: 4,
+			validame("holaa", {
+				minMax: 4,
 			})
 		).not.toBe("");
 	});

@@ -1,16 +1,16 @@
 
-exports.phoneEs = (errorMessagesObj, string) => {
-	
+exports.phoneEs = (stringParaValidar, config) => {
+		
 	let regex = new RegExp(/^[0-9]*$/, "");
-	let correcto1 = regex.test(string);
-	if (! correcto1) return errorMessagesObj.wl.phoneEs.onlyNumbers;
+	let correcto1 = regex.test(stringParaValidar);
+	if (! correcto1) return config.symbols.phoneEs.invalid[config.language];
 	
 	
-	if (string.length !== 9) return errorMessagesObj.wl.phoneEs["9numbers"];
+	if (stringParaValidar.length !== 9) return config.symbols.phoneEs.digits[config.language];
 	
 	
-	let correcto3 = ["6", "7", "8", "9"].includes(string.slice(0, 1));
-	if (! correcto3) return errorMessagesObj.wl.phoneEs.spanish;
+	let correcto3 = ["6", "7", "8", "9"].includes(stringParaValidar.slice(0, 1));
+	if (! correcto3) return config.symbols.phoneEs.invalid[config.language];
 	
 	
 	return "";
@@ -19,18 +19,18 @@ exports.phoneEs = (errorMessagesObj, string) => {
 
 
 
-exports.mobileEs = (errorMessagesObj, string) => {
+exports.mobileEs = (stringParaValidar, config) => {
 	
 	let regex = new RegExp(/^[0-9]*$/, "");
-	let correcto1 = regex.test(string);
-	if (! correcto1) return errorMessagesObj.wl.mobileEs.onlyNumbers;
+	let correcto1 = regex.test(stringParaValidar);
+	if (! correcto1) return config.symbols.mobileEs.invalid[config.language];
 	
 	
-	if (string.length !== 9) return errorMessagesObj.wl.mobileEs["9numbers"];
+	if (stringParaValidar.length !== 9) return config.symbols.mobileEs.digits[config.language];
 	
 	
-	let correcto3 = ["6", "7"].includes(string.slice(0, 1));
-	if (! correcto3) return errorMessagesObj.wl.mobileEs.spanish;
+	let correcto3 = ["6", "7"].includes(stringParaValidar.slice(0, 1));
+	if (! correcto3) return config.symbols.mobileEs.invalid[config.language];
 	
 	
 	return "";

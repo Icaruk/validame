@@ -4,12 +4,12 @@ const {validame, validameConfig, validameUtils} = require("./index");
 
 
 
-let error = validame("asd ñ", {
+let error = validame("hola", {
 	// req: 1,
 	// min: 3,
 	// max: 4,
 	// minMax: 3,
-	allow: "a A 1 _ ñ",
+	allow: "postalCodeEs",
 });
 
 if (error === "") {
@@ -17,5 +17,4 @@ if (error === "") {
 } else {
 	console.log("playground2 ❌", error );
 };
-
 
