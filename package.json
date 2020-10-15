@@ -24,6 +24,6 @@
 	"author": "Icaruk <adri-rk@hotmail.com>",
 	"license": "ISC",
 	"devDependencies": {
-		"jest": "^26.0.1"
+		"jest": "^26.5.3"
 	}
 }
