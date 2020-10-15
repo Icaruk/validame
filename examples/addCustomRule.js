@@ -1,38 +1,32 @@
 
 // Import
-const validame = require("../index");
+const {validame, validameConfig, validameUtils} = require("../index");
+
+const multiReplace = validameUtils.multiReplace;
 
 
-
-validame.o.messages.en.upperAndLower = {
-	upperAndLower: "It must have at least _%1 uppercase and _%2 lowercase characters",
-};
-validame.o.messages.es.upperAndLower = {
-	upperAndLower: "Tiene que tener al menos _%1 mayúsculas y _%2 minúsculas",
-};
-
-validame.o.ruleToFnc.upperAndLower = (errorMessagesObj, stringToValidate, valueGiven) => {
-	/*
-		0: errorMessagesObj (object)
-			- It's the same as validame.o.messages.<es/en>
-			- With errorMessagesObj.wl.over18 you can get the specific errors of this symbol.
-		1: stringToValidate (string) - The string you want to validate.
-		2: valueGiven (any) - In this case we have an array of 2 numbers.
-	*/
+// Create the function
+const myCustomRule = (stringToValidate, value, config) => {
 	
-	let upper = new RegExp(`[A-Z]{${valueGiven[0]}}`).test(stringToValidate);
-	let lower = new RegExp(`[a-z]{${valueGiven[1]}}`).test(stringToValidate);
+	let upper = new RegExp(`[A-Z]{${value[0]}}`).test(stringToValidate);
+	let lower = new RegExp(`[a-z]{${value[1]}}`).test(stringToValidate);
 	
 	
-	// With multilanguage
-	if (!upper || !lower) return validame.u.multiReplace(errorMessagesObj.upperAndLower, {
-		"_%1": valueGiven[0],
-		"_%2": valueGiven[1],
-	});
-	
-	
-	// Without multilanguage
-	// if (!upper || !lower) return `It must have at least ${valueGiven[0]} uppercase and ${valueGiven[1]} lowercase characters`;
+	if (!upper || !lower) {
+		
+		// Create message using replacers
+		let errorMessage = multiReplace(config.rules.upperAndLower.messages.must[config.language], {
+			"_%1": value[0],
+			"_%2": value[1],
+		});
+		
+		return errorMessage;
+		
+		
+		// Without multilanguage
+		return `It must have at least ${value[0]} uppercase and ${value[1]} lowercase characters`;
+		
+	};
 	
 	
 	// All OK
@@ -41,14 +35,26 @@ validame.o.ruleToFnc.upperAndLower = (errorMessagesObj, stringToValidate, valueG
 };
 
 
+// Create your custom rule
+validameConfig.rules.upperAndLower = {
+	fnc: myCustomRule,
+	messages: {
+		must: {
+			es: "Tiene que tener al menos _%1 mayúsculas y _%2 minúsculas.",
+			en: "It must have at least _%1 uppercase and _%2 lowercase characters",
+		}
+	},
+};
+
+
 
 // And you can use it now:
-let error1 = validame.v("mike", {
+let error1 = validame("mike", {
 	upperAndLower: [1, 2],
 });
-console.log( "error1", error1 );
+// error1 = "It must have at least 1 uppercase and 2 lowercase characters"
 
-let error2 = validame.v("Mike", {
+let error2 = validame("Mike", {
 	upperAndLower: [1, 2],
 });
-console.log( "error2", error2 );
+// error2 = ""

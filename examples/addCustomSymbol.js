@@ -1,30 +1,23 @@
 
 // Import
-const validame = require("../index");
+const {validame, validameConfig} = require("./index");
 
 
-// Adding my custom symbol
-validame.o.symbolToFnc.startWithVowel = /^[aeiou]+.*/i;
-validame.o.messages.en.wl.startWithVowel = "initial vowel";
-validame.o.messages.es.wl.startWithVowel = "vocal inicial";
 
-validame.o.symbolToFnc.over18 = (errorMessagesObj, stringToValidate) => {
-	/*
-		0: errorMessagesObj (object)
-			- It's the same as validame.o.messages.<es/en>
-			- With errorMessagesObj.wl.over18 you can get the specific errors of this symbol.
-		1: stringToValidate (string) - The string you want to validate.
-	*/
+// Create the function
+const myCustomSymbol = (stringToValidate, config) => {
+	
+	// Get the over18 symbol config
+	const symbolMessages = config.symbols.over18.messages;
+	
 	
 	// Check if it's a number
 	let age = parseInt(stringToValidate);
-	if (isNaN(age)) return "It must be a number";
-	// if (isNaN(age)) return errorMessagesObj.wl.over18.mustBeANumber; // for multilanguage
+	if (isNaN(age)) return symbolMessages.number[config.language];
 	
 	
 	// Check if it's over 18
-	if (age < 18) return "It must be over 18";
-	// if (age < 18) return errorMessagesObj.wl.over18.over18; // for multilanguage
+	if (age < 18) return symbolMessages.over[config.language];
 	
 	
 	// All OK
@@ -34,12 +27,29 @@ validame.o.symbolToFnc.over18 = (errorMessagesObj, stringToValidate) => {
 
 
 
-let error1 = validame.v("19", {
-	wl: "over18",
-});
-console.log( "error1: ", error1 );
+// Create your custom symbol
+validameConfig.symbols.over18 = {
+	regex: myCustomSymbol,
+	messages: {
+		number: {
+			es: "Tiene que ser un número",
+			en: "It must be a number",
+		},
+		over: {
+			es: "Tiene que ser mayor que 18",
+			en: "It must be over 18",
+		}
+	},
+};
 
-let error2 = validame.v("17", {
-	wl: "over18",
+
+
+let error1 = validame("19", {
+	allow: "over18",
 });
-console.log( "error2: ", error2 );
+// error1 = ""
+
+let error2 = validame("17", {
+	allow: "over18",
+});
+// error2 = "It must be over 18"

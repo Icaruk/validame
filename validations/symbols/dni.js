@@ -9,7 +9,7 @@ exports.dni = (stringParaValidar, config) => {
 	let correcto = regex.test(stringParaValidar);
 	
 	if (! correcto) {
-		return config.symbols.dni.invalid[config.language];
+		return config.symbols.dni.messages.invalid[config.language];
 	};
 	
 	
@@ -42,7 +42,7 @@ exports.dni = (stringParaValidar, config) => {
 	
 	if (letra !== letraCorrecta) {
 		// return `La letra final del DNI es incorrecta, debería ser ${letraCorrecta}.`;
-		return config.symbols.dni.finalLetter[config.language];
+		return config.symbols.dni.messages.finalLetter[config.language];
 	};
 	
 	

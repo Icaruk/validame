@@ -7,7 +7,7 @@
 
 **validame** is a javascript **string validator**.
 
-- 🚀 Lightweight (8.4 kB packed and 29 kB unpacked).
+- 🚀 Lightweight (8 kB packed and 25 kB unpacked).
 - ⚪️ Zero dependencies.
 - 🔧 Totally customizable.
 - 🧩 Modular.
@@ -16,6 +16,29 @@
 
 
 <br>
+
+
+
+# Table of contents
+
+- [Table of contents](#table-of-contents)
+- [⬇️ Import](#---import)
+- [🔮Basic examples](#--basic-examples-)
+- [🧭 Usage](#---usage-)
+- [📏 Rules](#---rules-)
+- [🏳️ Allow rule](#----allow-rule-)
+- [✳️ Symbols](#---symbols)
+- [🌍 Language](#---language)
+- [🧾 Editing a symbols and rules](#---editing-a-symbols-and-rules)
+  - [➡️ `symbols` property](#----symbols--property)
+  - [➡️ `rules` property](#----rules--property)
+- [⚗️ Creating your own rules](#---creating-your-own-rules)
+- [⚗️ Creating your own symbols](#---creating-your-own-symbols)
+- [🔮 Advanced examples](#---advanced-examples-)
+
+
+
+<br/>
 
 
 
@@ -77,10 +100,10 @@ let error = validame("My name is Mike", {
 ```js
 
 let error = validame("My name is Mike", {
-	allow: "a A"
+	allow: "aA"
 });
 
-// error = "It's only allowed: lowercase and uppercase."
+// error = "It's only allowed: letters."
 
 ```
 
@@ -110,11 +133,16 @@ let error = validame("My name is Mike", {
 validame (stringToValidate, rules);
 ```
 
-- **stringToValidate** (string):
-	- The string you want to validate.
-	
-- **rules** (object):
-	- One or more of the following:
+- **stringToValidate** `string`: The string you want to validate.
+- **rules** `object`: One or more rules, they are defined at `validameConfig.rules`.
+
+
+
+<br/>
+
+
+
+# 📏 Rules:
 
 ```js
 {
@@ -153,35 +181,43 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-## 🏳️ Allow (allow) rule:
+# 🏳️ Allow rule:
 
 - The symbol list must be **separated with a space**, example: `a A _ !`.
-- If stringToValidate contains one or more characters **outside the allow list** it will return an error.
+- If `stringToValidate` contains one or more characters **outside the allow list** it will return an error.
 - The validation is done from **left to right**.
 - Each symbol has a **regex or function** associated.
-- Built-in symbols and their associations:
-	
-	<br>
-	
-	- Regex:
-		- `a`: `a-z`
-		- `A`: `A-Z`
-		- `1`: `0-9`
-		- `_`: `spaces`
-		- `!`: `ºª\!|"@·#€\$%&¬/()=?'¿¡^[]+,{}-_<>~` `´
-		- `ñ`: `áéíóúñ`
-		- `Ñ`: `ÑÁÉÍÓÚ`
-	<br>
-	
-	- Functions:
-		- `phoneEs`: Spanish telephone number.
-		- `mobileEs`: Spanish mobile number.
-		- `dni`: Valid DNI (spain).
-		- `ibanEs`: Spanish IBAN.
-		- `email`: Email address.
-		- `postalCodeEs`: Spanish postal code.
-	<br>
-	
+
+
+
+<br/>
+
+
+
+# ✳️ Symbols
+
+- **Regex**:
+	- `a`: `a-z`
+	- `A`: `A-Z`
+	- `aA`: `a-zA-Z`
+	- `1`: `0-9`
+	- `_`: `spaces`
+	- `!`: `ºª\!|"@·#€\$%&¬/()=?'¿¡^`\[+]´,{}-_<>~`
+	- `ñ`: `áéíóúñ`
+	- `Ñ`: `ÑÁÉÍÓÚ`
+	- `ñÑ`: `áéíóúñÑÁÉÍÓÚ`
+<br/>
+
+- **Functions**:
+	- `phoneEs`: Spanish telephone number.
+	- `mobileEs`: Spanish mobile number.
+	- `dni`: Valid DNI (spain).
+	- `ibanEs`: Spanish IBAN.
+	- `email`: Email address.
+	- `postalCodeEs`: Spanish postal code.
+
+<br/>
+
 - If the symbols are regex, the error string is built automatically.
 
 
@@ -190,194 +226,213 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-# ⚙️ Options:
-
-They are at: `validame.o`
-
-
-
-<br>
-
-
-
-#### 🌍 Property language
-
-`validame.o.language`
-
-It specifies the language of the errors given.
-At the moment the possible options are: 
-
-- **"es"**
-- **"en"**
-
-
-
-<br>
-
-#### 🧾 Property messages
-
-`validame.o.messages`
-
-This property contains all the error messages given. The object has the following structure:
+# 🌍 Language
 
 ```js
-languageCode: {
-	rule1: "Your error message here",
-	rule2: "Your error message here",
-	allow: {
-		regexSymbol1: "Your error message here",
-		regexSymbol2: "Your error message here",
-		functionSymbol1: "Your error message here",
-		functionSymbol2: "Your error message here",
-	}
+const {validameConfig} = require("./index");
+
+valiadmeConfig.language = "es";
+```
+
+It specifies the language of the errors given.
+At the moment the possible options are: `es` and `en`.
+
+
+
+<br>
+
+
+
+# 🧾 Editing a symbols and rules
+
+```js
+const {validameConfig} = require("./index");
+
+valiadmeConfig.symbols = {...};
+valiadmeConfig.rules = {...};
+```
+
+
+## ➡️ `symbols` property
+
+- **regex** `regex | function`: Used when the symbol is called.
+- **messages** `object`: Messages displayed and his translations.
+
+Examples:
+
+```js
+"a": {
+	regex: /[a-z]/g,
+	messages: {
+		name: {
+			es: "minúsculas",
+			en: "lowercase",
+			xx: "here could be placed your own translation",
+		}
+	},
 }
 ```
 
-Currently `validame.o.messages.en` contains:
-
 ```js
-{
-	min: {
-		"min": "It should have _%1 minimum characters but it has _%2."
+"phoneEs": {
+	regex: require("./validations/symbols/phone").phoneEs,
+	messages: {
+		invalid: {
+			es: "No es un teléfono español válido",
+			en: "It isn't a valid spanish phone",
+			xx: "here could be placed your own translation",
+		},
+		digits: {
+			es: "Debe tener 9 dígitos",
+			en: "It must have 9 digits",
+			xx: "here could be placed your own translation",
+		}
 	},
-	max: {
-		"max": "It should have _%1 maximum characters but it has _%2."
-	},
-	minmax: {
-		"minmax": "It should have _%1 characters but it has _%2."
-	},
-	req: {
-		"cantBeEmpty": "It can't be empty."
-	},
-	allow: {
-		"itsOnlyAllowed": "It's only allowed: ",
-		"and": " and ",
-		"a": "lowercase",
-		"A": "uppercase",
-		"1": "numbers",
-		"_": "spaces",
-		"!": "special characteres",
-		"ñ": "accent and ñ",
-		
-		phoneEs: {
-			"onlyNumbers": "It must contain only numbers",
-			"9numbers": "It must have 9 numbers",
-			"spanish": "It must be a spanish telephone",
-		},
-		mobileEs: {
-			"onlyNumbers": "It must contain only numbers",
-			"9numbers": "It must have 9 numbers",
-			"spanish": "It must be a spanish mobile",
-		},
-		
-		dni: {
-			"structure": "It should follow one these structures: 12345678Z o X1234567L",
-			"finalLetter": "The final letter it's incorrect",
-		},
-		
-		iban: {
-			"structure": "It should follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
-			"notValid": "The IBAN isn't valid"
-		},
-		
-		email: {
-			"structure": "It should follow the following structure: address@email.es",
-		},
-		
-		postalCode: {
-			"5numbers": "It must have 5 numbers",
-			"onlyNumbers": "It must contain only numbers",
-			"notValid": "The postal code isn't valid"
-		},
-	},
-},
+}
 ```
 
-- The `_%1` `_%2` (and so on) are replacers.
+
+
+<br/>
+
+
+
+
+## ➡️ `rules` property
+
+- **regex** `regex | function`: Used when the symbol is called.
+- The next properties are an `object` with the name of the message for the symbol:
+
+Examples:
+
+```js
+allow: {
+	fnc: require("./validations/rules/allow"),
+	messages: {
+		itsOnlyAllowed: {
+			es: "Sólo se permite: ",
+			en: "It's only allowed: ",
+		},
+		and: {
+			es: " y ",
+			en: " and ",
+		}
+	},
+}
+```
+
+```js
+min: {
+	fnc: require("./validations/rules/min"),
+	messages: {
+		error: {
+			es: "Debería tener _%1 caracteres como mínimo pero tiene _%2.",
+			en: "It should have _%1 minimum characters but it has _%2.",
+		}
+	},
+}
+```
+
+### 🔴 The `_%1` `_%2` (and so on) are replacers.
 
 
 
 <br>
-#### 🧱 Property symbolToFnc
 
-`validame.o.symbolToFnc`
 
-- This property contains the regex/function of each symbol.<br>
-- Built-in symbols:
+
+# ⚗️ Creating your own rules
 
 ```js
-{
-	"a": /[a-z]/g,
-	"A": /[A-Z]/g,
-	"1": /[0-9]/g,
-	"_": /\s/g,
-	"!": /[ºª\\!\|"@·#€\$%&¬\/\(\)=\?'¿¡\^`\[\+\]´,{}\-_<>~]/g,
-	"ñ": /[ñáéíóú]/g,
-	"Ñ": /[ÑÁÉÍÓÚ]/g,
+// Import
+const {validame, validameConfig, validameUtils} = require("../index");
+
+const multiReplace = validameUtils.multiReplace;
+
+
+// Create the function
+const myCustomRule = (stringToValidate, value, config) => {
 	
-	"phoneEs": [Function],
-	"mobileEs": [Function],
-	"dni": [Function],
-	"ibanEs": [Function],
-	"email": [Function],
-	"postalCodeEs": [Function],
-},
-```
+	let upper = new RegExp(`[A-Z]{${value[0]}}`).test(stringToValidate);
+	let lower = new RegExp(`[a-z]{${value[1]}}`).test(stringToValidate);
+	
+	
+	if (!upper || !lower) {
+		
+		// Create message using replacers
+		let errorMessage = multiReplace(config.rules.upperAndLower.messages.must[config.language], {
+			"_%1": value[0],
+			"_%2": value[1],
+		});
+		
+		return errorMessage;
+		
+		
+		// Without multilanguage
+		return `It must have at least ${value[0]} uppercase and ${value[1]} lowercase characters`;
+		
+	};
+	
+	
+	// All OK
+	return "";
+	
+};
 
-##### You can add your own regex symbols:
 
-```js
-
-validame.o.symbolToFnc.startWithVowel = /^[aeiou]+.*/i;
-
-// Add the error message
-validame.o.messages.en.wl.startWithVowel = "initial vowel"; // To build → It's only allowed: initial vowel
-validame.o.messages.es.wl.startWithVowel = "vocal inicial"; // To build → Sólo se permite: vocal inicial
+// Create your custom rule
+validameConfig.rules.upperAndLower = {
+	fnc: myCustomRule,
+	messages: {
+		must: {
+			es: "Tiene que tener al menos _%1 mayúsculas y _%2 minúsculas.",
+			en: "It must have at least _%1 uppercase and _%2 lowercase characters",
+		}
+	},
+};
 
 
 
 // And you can use it now:
-let error = validame("Adrian", {
-	allow: "startWithVowel",
+let error1 = validame("mike", {
+	upperAndLower: [1, 2],
 });
-// error = ""
+// error1 = "It must have at least 1 uppercase and 2 lowercase characters"
 
-let error = validame("Mike", {
-	allow: "startWithVowel",
+let error2 = validame("Mike", {
+	upperAndLower: [1, 2],
 });
-// error = "It's only allowed: initial vowel"
-
+// error2 = ""
 
 ```
 
-##### You can add your own function symbols:
+
+
+<br>
+
+
+
+# ⚗️ Creating your own symbols
 
 ```js
-
-// This is optional, you can just return the error message on your function.
-validame.o.messages.es.wl.over18 = {
-	mustBeANumber: "It must be a number",
-	over18: "It must be over 18",
-};
+// Import
+const {validame, validameConfig} = require("validame");
 
 
-validame.o.symbolToFnc.over18 = (errorMessagesObj, stringToValidate) => {
-	/*
-		0: errorMessagesObj (object)
-			- It's the same as validame.o.messages.<es/en>
-			- With errorMessagesObj.wl.over18 you can get the specific errors of this symbol.
-		1: stringToValidate (string) - The string you want to validate.
-	*/
+// Create the function
+const myCustomSymbol = (stringToValidate, config) => {
+	
+	// Get the over18 symbol config
+	const symbolMessages = config.symbols.over18.messages;
+	
 	
 	// Check if it's a number
 	let age = parseInt(stringToValidate);
-	if (isNaN(age)) return "It must be a number";
-	// if (isNaN(age)) return errorMessagesObj.wl.over18.mustBeANumber; // for multilanguage
+	if (isNaN(age)) return symbolMessages.number[config.language];
 	
 	
 	// Check if it's over 18
-	if (age < 18) return "It must be over 18";
-	// if (age < 18) return errorMessagesObj.wl.over18.over18; // for multilanguage
+	if (age < 18) return symbolMessages.over[config.language];
 	
 	
 	// All OK
@@ -386,107 +441,42 @@ validame.o.symbolToFnc.over18 = (errorMessagesObj, stringToValidate) => {
 };
 
 
+// Create your custom symbol
+validameConfig.symbols.over18 = {
+	regex: myCustomSymbol,
+	messages: {
+		number: {
+			es: "Tiene que ser un número",
+			en: "It must be a number",
+		},
+		over: {
+			es: "Tiene que ser mayor que 18",
+			en: "It must be over 18",
+		}
+	},
+};
 
-// And you can use it now:
-let error = validame("19", {
+
+
+let error1 = validame("35", {
 	allow: "over18",
 });
-// error = ""
+// error1 = ""
 
-let error = validame("17", {
+let error2 = validame("17", {
 	allow: "over18",
 });
-// error = "It must be over 18"
+// error2 = "It must be over 18"
 
 ```
 
 
 
-<br>
+<br/>
 
 
 
-#### 🧱 Property ruleToFnc
-
-`validame.o.ruleToFnc`
-
-This property contains the functions that makes the validation of each rule.<br>
-You can add your own.
-
-
-```js
-{
-	"min": [Function],
-	"max": [Function],
-	"minmax": [Function],
-	"req": [Function],
-	"wl": [Function]
-},
-```
-
-
-##### You can add your own rules:
-
-```js
-
-validame.o.messages.en.upperAndLower = {
-	upperAndLower: "It must have at least _%1 uppercase and _%2 lowercase characters",
-};
-validame.o.messages.es.upperAndLower = {
-	upperAndLower: "Tiene que tener al menos _%1 mayúsculas y _%2 minúsculas",
-};
-
-validame.o.ruleToFnc.upperAndLower = (errorMessagesObj, stringToValidate, valueGiven) => {
-	/*
-		0: errorMessagesObj (object)
-			- It's the same as validame.o.messages.<es/en>
-			- With errorMessagesObj.wl.over18 you can get the specific errors of this symbol.
-		1: stringToValidate (string) - The string you want to validate.
-		2: valueGiven (any) - In this case we have an array of 2 numbers.
-	*/
-	
-	let upper = new RegExp(`[A-Z]{${valueGiven[0]}}`).test(stringToValidate);
-	let lower = new RegExp(`[a-z]{${valueGiven[1]}}`).test(stringToValidate);
-	
-	
-	// With multilanguage
-	if (!upper || !lower) return validame.u.multiReplace(errorMessagesObj.upperAndLower, {
-		"_%1": valueGiven[0],
-		"_%2": valueGiven[1],
-	});
-	
-	
-	// Without multilanguage
-	// if (!upper || !lower) return `It must have at least ${valueGiven[0]} uppercase and ${valueGiven[1]} lowercase characters`;
-	
-	
-	// All OK
-	return "";
-	
-};
-
-
-
-// And you can use it now:
-let error = validame("mike", {
-	upperAndLower: [1, 2],
-});
-// error = "It must have at least 1 uppercase and 2 lowercase characters"
-
-let error = validame("Mike", {
-	upperAndLower: [1, 2],
-});
-// error = ""
-
-```
-
-
-
-<br>
-
-
-
-# 💡 Advanced examples:
+# 🔮 Advanced examples:
 
 
 ```js
@@ -559,6 +549,8 @@ let error = validame(null, {
 ```
 
 
+---
 
+### [⏫](#table-of-contents)
 
 

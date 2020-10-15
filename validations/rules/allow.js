@@ -56,7 +56,7 @@ module.exports = (stringParaValidar, strAllow, config) => {
 				
 				if (idx === maxIdx && maxIdx > 0) error += strAnd; // último separador: "y" en lugar de ","
 				
-				error += config.symbols[_x].name[config.language];
+				error += config.symbols[_x].messages.name[config.language];
 				
 				if (idx < maxIdx - 1) error += ", "; // separador
 				if (idx === maxIdx) error += "."; // punto final

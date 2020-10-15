@@ -1,7 +1,6 @@
 
 // Import
-const {validame, validameConfig, validameUtils} = require("./index");
-
+const {validame, validameConfig} = require("./index");
 
 
 let error = validame("hola", {

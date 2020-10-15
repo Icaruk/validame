@@ -9,7 +9,7 @@ exports.ibanEs = (stringParaValidar, config) => {
 	let correcto = regex.test(stringParaValidar);
 	
 	if (! correcto) {
-		return config.symbols.ibanEs.structure[config.language];
+		return config.symbols.ibanEs.messages.structure[config.language];
 	};
 	
 	
@@ -56,7 +56,7 @@ exports.ibanEs = (stringParaValidar, config) => {
 	
 	
 	if (resto != 1) { // comparo STRING con NUMBER
-		return config.symbols.ibanEs.invalid[config.language];
+		return config.symbols.ibanEs.messages.invalid[config.language];
 	};	
 	
 	

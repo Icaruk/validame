@@ -204,128 +204,158 @@ let config = {
 		
 		"a": {
 			regex: /[a-z]/g,
-			name: {
-				es: "minúsculas",
-				en: "lowercase",
-			}
+			messages: {
+				name: {
+					es: "minúsculas",
+					en: "lowercase",
+				}
+			},
 		},
 		"A": {
 			regex: /[A-Z]/g,
-			name: {
-				es: "mayúsculas",
-				en: "uppercase",
-			}
+			messages: {
+				name: {
+					es: "mayúsculas",
+					en: "uppercase",
+				}	
+			},			
 		},
 		"aA": {
 			regex: /[a-z]/gi,
-			name: {
-				es: "letras",
-				en: "letters",
-			}
+			messages: {
+				name: {
+					es: "letras",
+					en: "letters",
+				}	
+			},
 		},
 		"1": {
 			regex: /[0-9]/g,
-			name: {
-				es: "números",
-				en: "numbers",
-			}
+			messages: {
+				name: {
+					es: "números",
+					en: "numbers",
+				}
+			},
 		},
 		"_": {
 			regex: /\s/g,
-			name: {
-				es: "espacios",
-				en: "spaces",
-			}
+			messages: {
+				name: {
+					es: "espacios",
+					en: "spaces",
+				}	
+			},
 		},
 		"!": {
 			regex: /[ºª\\!\|"@·#€\$%&¬\/\(\)=\?'¿¡\^`\[\+\]´,{}\-_<>~]/g,
-			name: {
-				es: "caracteres especiales",
-				en: "special characters",
-			}
+			messages: {
+				name: {
+					es: "caracteres especiales",
+					en: "special characters",
+				}	
+			},
 		},
 		"ñ": {
 			regex: /[ñáéíóú]/g,
-			name: {
-				es: "tildes y ñ",
-				en: "accents and ñ",
+			messages: {
+				name: {
+					es: "tildes y ñ",
+					en: "accents and ñ",
+				}
 			}
 		},
 		"Ñ": {
 			regex: /[ÑÁÉÍÓÚ]/g,
-			name: {
-				es: "tildes y Ñ",
-				en: "accents and Ñ",
-			}
+			messages: {	
+				name: {
+					es: "tildes y Ñ",
+					en: "accents and Ñ",
+				}
+			},
 		},
 		"ñÑ": {
 			regex: /[ñáéíóú]/gi,
-			name: {
-				es: "tildes, ñ y Ñ",
-				en: "accents, ñ and Ñ",
-			}
+			messages: {
+				name: {
+					es: "tildes, ñ y Ñ",
+					en: "accents, ñ and Ñ",
+				}
+			},
 		},
 		"phoneEs": {
 			regex: require("./validations/symbols/phone").phoneEs,
-			invalid: {
-				es: "No es un teléfono español válido",
-				en: "It isn't a valid spanish phone",
+			messages: {
+				invalid: {
+					es: "No es un teléfono español válido",
+					en: "It isn't a valid spanish phone",
+				},
+				digits: {
+					es: "Debe tener 9 dígitos",
+					en: "It must have 9 digits",
+				}
 			},
-			digits: {
-				es: "Debe tener 9 dígitos",
-				en: "It must have 9 digits",
-			}
 		},
 		"mobileEs": {
 			regex: require("./validations/symbols/phone").mobileEs,
-			invalid: {
-				es: "No es un móvil español válido",
-				en: "It isn't a valid spanish mobile",
+			messages: {
+				invalid: {
+					es: "No es un móvil español válido",
+					en: "It isn't a valid spanish mobile",
+				},
+				digits: {
+					es: "Debe tener 9 dígitos",
+					en: "It must have 9 digits",
+				}
 			},
-			digits: {
-				es: "Debe tener 9 dígitos",
-				en: "It must have 9 digits",
-			}
 		},
 		"dni": {
 			regex: require("./validations/symbols/dni").dni,
-			invalid: {
-				es: "No es un DNI válido",
-				en: "It isn't a valid DNI",
+			messages: {
+				invalid: {
+					es: "No es un DNI válido",
+					en: "It isn't a valid DNI",
+				},
+				finalLetter: {
+					es: "La letra final es inválida",
+					en: "The last letter is invalid",
+				}
 			},
-			finalLetter: {
-				es: "La letra final es inválida",
-				en: "The last letter is invalid",
-			}
 		},
 		"email": {
 			regex: require("./validations/symbols/email").email,
-			invalid: {
-				es: "No es un email válido",
-				en: "It isn't a valid email",
-			}
+			messages: {
+				invalid: {
+					es: "No es un email válido",
+					en: "It isn't a valid email",
+				}
+			},
 		},
 		"ibanEs": {
 			regex: require("./validations/symbols/iban").ibanEs,
-			invalid: {
-				es: "No es un IBAN válido",
-				en: "It isn't a valid IBAN",
+			messages: {
+				invalid: {
+					es: "No es un IBAN válido",
+					en: "It isn't a valid IBAN",
+				},
+				structure: {
+					es: "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890",
+					en: "It must follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
+				}
 			},
-			structure: {
-				es: "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890",
-				en: "It must follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
-			}
 		},
 		"postalCodeEs": {
 			regex: require("./validations/symbols/postalCode").postalCodeEs,
-			invalid: {
-				es: "No es válido",
-				en: "It isn't valid",
+			messages: {
+				invalid: {
+					es: "No es válido",
+					en: "It isn't valid",
+				},
+				digits: {
+					es: "Debe tener 5 dígitos",
+					en: "It must have 5 digits",
+				}
 			},
-			digits: {
-				es: "Debe tener 5 dígitos",
-				en: "It must have 5 digits",
-			}
 		},
 		
 		
