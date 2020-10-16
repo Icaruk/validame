@@ -29,7 +29,7 @@
 - [🏳️ Allow rule](#-allow-rule)
 - [✳️ Symbols](#-symbols)
 - [🌍 Language](#-language)
-- [🧾 Editing a symbols and rules](#--editing-a-symbols-and-rules)
+- [🧾 Editing a symbols and rules](#--editing-symbols-and-rules)
   - [➡️ `symbols` property](#-symbols-property)
   - [➡️ `rules` property](#-rules-property)
 - [⚗️ Creating your own rules](#-creating-your-own-rules)
@@ -243,7 +243,7 @@ At the moment the possible options are: `es` and `en`.
 
 
 
-# 🧾 Editing a symbols and rules
+# 🧾 Editing symbols and rules
 
 ```js
 const {validameConfig} = require("./index");
