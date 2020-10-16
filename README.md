@@ -23,10 +23,10 @@
 
 - [Table of contents](#table-of-contents)
 - [⬇️ Import](#---import)
-- [🔮Basic examples](#--basic-examples-)
-- [🧭 Usage](#---usage-)
-- [📏 Rules](#---rules-)
-- [🏳️ Allow rule](#----allow-rule-)
+- [🔮Basic examples](#--basic-examples)
+- [🧭 Usage](#---usage)
+- [📏 Rules](#---rules)
+- [🏳️ Allow rule](#----allow-rule)
 - [✳️ Symbols](#---symbols)
 - [🌍 Language](#---language)
 - [🧾 Editing a symbols and rules](#---editing-a-symbols-and-rules)
@@ -34,7 +34,7 @@
   - [➡️ `rules` property](#----rules--property)
 - [⚗️ Creating your own rules](#---creating-your-own-rules)
 - [⚗️ Creating your own symbols](#---creating-your-own-symbols)
-- [🔮 Advanced examples](#---advanced-examples-)
+- [🔮 Advanced examples](#---advanced-examples)
 
 
 
@@ -54,7 +54,7 @@ const {validame} = require("validame");
 
 
 
-# 🔮Basic examples:
+# 🔮Basic examples
 
 ```js
 
@@ -125,7 +125,7 @@ let error = validame("My name is Mike", {
 
 
 
-# 🧭 Usage:
+# 🧭 Usage
 
 **Returns** an empty string if the validation is correct, otherwise it returns an string explaining the error.
 
@@ -142,7 +142,7 @@ validame (stringToValidate, rules);
 
 
 
-# 📏 Rules:
+# 📏 Rules
 
 ```js
 {
@@ -181,7 +181,7 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-# 🏳️ Allow rule:
+# 🏳️ Allow rule
 
 - The symbol list must be **separated with a space**, example: `a A _ !`.
 - If `stringToValidate` contains one or more characters **outside the allow list** it will return an error.
@@ -476,7 +476,7 @@ let error2 = validame("17", {
 
 
 
-# 🔮 Advanced examples:
+# 🔮 Advanced examples
 
 
 ```js
