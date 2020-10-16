@@ -33,7 +33,7 @@
   - [➡️ `symbols` property](#-symbols-property)
   - [➡️ `rules` property](#-rules-property)
 - [⚗️ Creating your own rules](#-creating-your-own-rules)
-- [⚗️ Creating your own symbols](#-creating-your-own-symbols)
+- [⚗️ Creating your own symbols](#️-creating-your-own-symbols)
 - [🔮 Advanced examples](#-advanced-examples)
 
 
