@@ -22,7 +22,7 @@
 # Table of contents
 
 - [Table of contents](#table-of-contents)
-- [⬇️ Import](#-import)
+- [⬇️ Import](#️-import)
 - [🔮Basic examples](#-basic-examples)
 - [🧭 Usage](#-usage)
 - [📏 Rules](#-rules)
