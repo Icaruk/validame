@@ -22,19 +22,19 @@
 # Table of contents
 
 - [Table of contents](#table-of-contents)
-- [⬇️ Import](#---import)
-- [🔮Basic examples](#--basic-examples)
-- [🧭 Usage](#---usage)
-- [📏 Rules](#---rules)
-- [🏳️ Allow rule](#----allow-rule)
-- [✳️ Symbols](#---symbols)
-- [🌍 Language](#---language)
-- [🧾 Editing a symbols and rules](#---editing-a-symbols-and-rules)
-  - [➡️ `symbols` property](#----symbols--property)
-  - [➡️ `rules` property](#----rules--property)
-- [⚗️ Creating your own rules](#---creating-your-own-rules)
-- [⚗️ Creating your own symbols](#---creating-your-own-symbols)
-- [🔮 Advanced examples](#---advanced-examples)
+- [⬇️ Import](#-import)
+- [🔮Basic examples](#-basic-examples)
+- [🧭 Usage](#-usage)
+- [📏 Rules](#-rules)
+- [🏳️ Allow rule](#-allow-rule)
+- [✳️ Symbols](#-symbols)
+- [🌍 Language](#-language)
+- [🧾 Editing a symbols and rules](#--editing-a-symbols-and-rules)
+  - [➡️ `symbols` property](#-symbols-property)
+  - [➡️ `rules` property](#-rules-property)
+- [⚗️ Creating your own rules](#-creating-your-own-rules)
+- [⚗️ Creating your own symbols](#-creating-your-own-symbols)
+- [🔮 Advanced examples](#-advanced-examples)
 
 
 
