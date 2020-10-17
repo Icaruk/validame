@@ -229,9 +229,9 @@ The rules will be checked in the same order they are listed, example:
 # 🌍 Language
 
 ```js
-const {validameConfig} = require("./index");
+const {validameConfig} = require("validame");
 
-valiadmeConfig.language = "es";
+validameConfig.language = "es";
 ```
 
 It specifies the language of the errors given.
@@ -246,7 +246,7 @@ At the moment the possible options are: `es` and `en`.
 # 🧾 Editing symbols and rules
 
 ```js
-const {validameConfig} = require("./index");
+const {validameConfig} = require("validame");
 
 valiadmeConfig.symbols = {...};
 valiadmeConfig.rules = {...};
@@ -345,7 +345,7 @@ min: {
 
 ```js
 // Import
-const {validame, validameConfig, validameUtils} = require("../index");
+const {validame, validameConfig, validameUtils} = require("validame");
 
 const multiReplace = validameUtils.multiReplace;
 
