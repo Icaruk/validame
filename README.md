@@ -7,7 +7,7 @@
 
 **validame** is a javascript **string validator**.
 
-- 🚀 Lightweight (9 kB packed and 35 kB unpacked).
+- 🚀 Lightweight (8 kB packed and 32 kB unpacked).
 - ⚪️ Zero dependencies.
 - 🔧 Totally customizable.
 - 🧩 Modular.
