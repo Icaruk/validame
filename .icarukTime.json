@@ -1,10 +1,10 @@
 {
     "idleHeartbeats": 20370,
-    "navigatingHeartbeats": 8597,
-    "totalCodingHeartbeats": 47047,
+    "navigatingHeartbeats": 8638,
+    "totalCodingHeartbeats": 47080,
     "languageHeartbeats": {
         "jsonc": 198,
-        "javascript": 33871,
+        "javascript": 33904,
         "json": 549,
         "code-runner-output": 1451,
         "markdown": 10429,
@@ -54,7 +54,7 @@
         ".gitignore": 58,
         "extension-output-#14": 45,
         "extension-output-#15": 299,
-        "validations/rules/allow.js": 721,
+        "validations/rules/allow.js": 754,
         "f:\\Programación\\Economos\\b-economos\\api.REST": 46,
         "validations/rules/only.js": 327,
         "tasks": 48,
