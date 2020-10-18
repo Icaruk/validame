@@ -1,22 +1,23 @@
 {
-    "idleHeartbeats": 20396,
-    "navigatingHeartbeats": 8652,
-    "totalCodingHeartbeats": 47640,
+    "idleHeartbeats": 20500,
+    "navigatingHeartbeats": 8662,
+    "totalCodingHeartbeats": 48054,
     "languageHeartbeats": {
         "jsonc": 198,
-        "javascript": 34464,
-        "json": 549,
+        "javascript": 34527,
+        "json": 708,
         "code-runner-output": 1451,
         "markdown": 10429,
         "scminput": 171,
         "plaintext": 274,
         "ignore": 58,
-        "http": 46
+        "http": 46,
+        "typescript": 192
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 172,
-        "index.js": 13279,
-        "package.json": 549,
+        "index.js": 13342,
+        "package.json": 708,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
@@ -66,6 +67,7 @@
         "tests/phone.test.js": 404,
         "tests/email.test.js": 365,
         "README copy.md": 49,
-        "README_ES.md": 627
+        "README_ES.md": 627,
+        "index.d.ts": 192
     }
 }

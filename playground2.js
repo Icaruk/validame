@@ -1,9 +1,9 @@
 
 // Import
 const {validame, validameConfig} = require("./index");
-let asd;
 
-let error = validame("hola", {
+
+let error = validame(12, {
 	// req: 1,
 	// min: 3,
 	// max: 4,
@@ -16,4 +16,7 @@ if (error === "") {
 } else {
 	console.log("playground2 ❌", error );
 };
+
+
+
 

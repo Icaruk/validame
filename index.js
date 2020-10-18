@@ -1,109 +1,4 @@
 
-const options = {
-	
-	language: "en", // es, en, fr
-	
-	messages: {
-		
-		es: {
-			wl: {
-				"itsOnlyAllowed": "Sólo se permite: ",
-				"and": " y ",
-				"a": "minúsculas",
-				"A": "mayúsculas",
-				"1": "números",
-				"_": "espacios",
-				"!": "caracteres especiales",
-				"ñ": "acentos y ñ",
-				
-				phoneEs: {
-					"onlyNumbers": "Sólo puede contener números",
-					"9numbers": "Tiene que tener tener 9 números",
-					"spanish": "Tiene que ser un teléfono español",
-				},
-				mobileEs: {
-					"onlyNumbers": "Sólo puede contener números",
-					"9numbers": "Tiene que tener tener 9 números",
-					"spanish": "Tiene que ser un móvil español",
-				},
-				
-				dni: {
-					"structure": "Debe seguir una de las siguiente estructuras: 12345678Z o X1234567L",
-					"finalLetter": "La letra final es incorrecta",
-				},
-				
-				iban: {
-					"structure": "Debe seguir la siguiente estructura (sin espacios): ES 12 1234 1234 12 1234567890",
-					"notValid": "El IBAN no es válido"
-				},
-				
-				email: {
-					"structure": "Debe seguir la siguiente estructura: direccion@email.es",
-				},
-				
-				postalCode: {
-					"5numbers": "Tiene que tener 5 números",
-					"onlyNumbers": "Sólo puede contener números",
-					"notValid": "El código postal no es válido"
-				},
-				
-				
-			},
-			
-			
-		},
-		
-		en: {
-			wl: {
-				"itsOnlyAllowed": "It's only allowed: ",
-				"and": " and ",
-				"a": "lowercase",
-				"A": "uppercase",
-				"1": "numbers",
-				"_": "spaces",
-				"!": "special characteres",
-				"ñ": "accent and ñ",
-				
-				phoneEs: {
-					"onlyNumbers": "It must contain only numbers",
-					"9numbers": "It must have 9 numbers",
-					"spanish": "It must be a spanish telephone",
-				},
-				mobileEs: {
-					"onlyNumbers": "It must contain only numbers",
-					"9numbers": "It must have 9 numbers",
-					"spanish": "It must be a spanish mobile",
-				},
-				
-				dni: {
-					"structure": "It should follow one these structures: 12345678Z o X1234567L",
-					"finalLetter": "The final letter it's incorrect",
-				},
-				
-				iban: {
-					"structure": "It should follow the following structure (without spaces): ES 12 1234 1234 12 1234567890",
-					"notValid": "The IBAN isn't valid"
-				},
-				
-				email: {
-					"structure": "It should follow the following structure: address@email.es",
-				},
-				
-				postalCode: {
-					"5numbers": "It must have 5 numbers",
-					"onlyNumbers": "It must contain only numbers",
-					"notValid": "The postal code isn't valid"
-				},
-			},
-			
-		},
-		
-	}
-		
-};
-
-
-
 /**
  * @typedef Rules
  * @property {0 | 1 | 2} req Required:
@@ -368,14 +263,6 @@ let config = {
 			},
 		},
 		
-		
-		
-		// "dni": require("./validations/symbols/dni").dni,
-		// "ibanEs": require("./validations/symbols/iban").ibanEs,
-		// "email": require("./validations/symbols/email").email,
-		// "postalCodeEs": require("./validations/symbols/postalCode").postalCodeEs,
-		
-		
 	},
 	
 	rules: {
@@ -460,19 +347,7 @@ let config = {
 	},
 	
 	
-	
-	
 };
-
-
-
-// let validame = {
-// 	config: config,
-	
-// 	options: options,
-// 	v: validation,
-// 	utils: utils,
-// };
 
 
 
