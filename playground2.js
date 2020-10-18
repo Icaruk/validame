@@ -1,14 +1,14 @@
 
 // Import
 const {validame, validameConfig} = require("./index");
-
+let asd;
 
 let error = validame("hola", {
 	// req: 1,
 	// min: 3,
 	// max: 4,
 	// minMax: 3,
-	allow: "postalCodeEs",
+	allow: "aA _ 1 ñÑ",
 });
 
 if (error === "") {

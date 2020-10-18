@@ -148,6 +148,26 @@ const validation = (stringParaValidar = "", rules) => {
 	
 	
 	
+	// Convierto de número a string
+	if (typeof stringParaValidar === "number") {
+		stringParaValidar = stringParaValidar.toString();
+	};
+	
+	
+	
+	// Si no es string, undefined ni null, tiro error
+	let type = typeof stringParaValidar;
+	
+	if (
+		type !== "string" &&
+		type !== "undefined" &&
+		stringParaValidar !== null
+	) {
+		return "Error: must validate a string";
+	};
+	
+	
+	
 	// Recorro las propiedades del param rules
 	for (const [key, value] of Object.entries(rules)) {
 		
