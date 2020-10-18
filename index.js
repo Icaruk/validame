@@ -98,17 +98,7 @@ const options = {
 			
 		},
 		
-	},
-	
-	// ruleToFnc: {
-		
-	// 	"min": require("./validations/min"),
-	// 	"max": require("./validations/max"),
-	// 	"minmax": require("./validations/minmax"),
-	// 	"req": require("./validations/rules/req"),
-	// 	"wl": require("./validations/rules/allow"),
-		
-	// },
+	}
 		
 };
 

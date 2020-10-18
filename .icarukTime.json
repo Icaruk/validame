@@ -1,11 +1,11 @@
 {
     "idleHeartbeats": 20370,
-    "navigatingHeartbeats": 8595,
-    "totalCodingHeartbeats": 46985,
+    "navigatingHeartbeats": 8597,
+    "totalCodingHeartbeats": 47047,
     "languageHeartbeats": {
         "jsonc": 198,
         "javascript": 33871,
-        "json": 487,
+        "json": 549,
         "code-runner-output": 1451,
         "markdown": 10429,
         "scminput": 171,
@@ -16,7 +16,7 @@
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 172,
         "index.js": 12719,
-        "package.json": 487,
+        "package.json": 549,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
