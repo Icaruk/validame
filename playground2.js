@@ -3,12 +3,12 @@
 const {validame, validameConfig} = require("./index");
 
 
-let error = validame(12, {
+let error = validame("12.12", {
 	// req: 1,
 	// min: 3,
 	// max: 4,
 	// minMax: 3,
-	allow: "aA _ 1 ñÑ",
+	allow: "2",
 });
 
 if (error === "") {

@@ -15,11 +15,12 @@ module.exports = (stringParaValidar, strAllow, config) => {
 		// Itero el array, por ejemplo: ["a", "1", "_"]
 		for (_symbol of arrWl) {
 			
+			// Obtengo el symbol
+			let symbol = config.symbols && config.symbols[_symbol];
+			if (!symbol) continue;
+			
 			// Obtengo la función/regex
-			let fnc = config.symbols[_symbol].regex;
-			
-			
-			// Si no encuentro, paso al siguiente símbolo
+			let fnc = symbol.regex;
 			if (!fnc) continue;
 			
 			

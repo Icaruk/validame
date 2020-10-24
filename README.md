@@ -5,7 +5,7 @@
 
 
 
-**validame** is a javascript **string validator**.
+**validame** is a javascript **string validator** that returns the error message.
 
 - 🚀 Lightweight (8 kB packed and 32 kB unpacked).
 - ⚪️ Zero dependencies.
@@ -201,8 +201,9 @@ The rules will be checked in the same order they are listed, example:
 	- `A`: `A-Z`
 	- `aA`: `a-zA-Z`
 	- `1`: `0-9`
+	- `2`: `0-9.,`
 	- `_`: `spaces`
-	- `!`: `ºª\!|"@·#€\$%&¬/()=?'¿¡^`\[+]´,{}-_<>~`
+	- `!`: `ºª\!|"@·#€\$%&¬/()=?'¿¡^``\[+]´,{}-_<>~`
 	- `ñ`: `áéíóúñ`
 	- `Ñ`: `ÑÁÉÍÓÚ`
 	- `ñÑ`: `áéíóúñÑÁÉÍÓÚ`
@@ -235,7 +236,7 @@ validameConfig.language = "es";
 ```
 
 It specifies the language of the errors given.
-At the moment the possible options are: `es` and `en`.
+At the moment the possible options are `es` and `en` but you can add your own language and translations.
 
 
 
@@ -254,6 +255,8 @@ valiadmeConfig.rules = {...};
 
 
 ## ➡️ `symbols` property
+
+They are used inside `allow` rule. Example: `allow: "aA 1"` (letters and numbers).
 
 - **regex** `regex | function`: Used when the symbol is called.
 - **messages** `object`: Messages displayed and his translations.
@@ -300,8 +303,8 @@ Examples:
 
 ## ➡️ `rules` property
 
-- **regex** `regex | function`: Used when the symbol is called.
-- The next properties are an `object` with the name of the message for the symbol:
+- **fnc** `function`: Used when the rule is called.
+- The next properties are an `object` with the name of the error message for the rule:
 
 Examples:
 

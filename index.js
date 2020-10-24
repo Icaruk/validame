@@ -16,8 +16,8 @@
 
 /**
  * @typedef Symbols
- * @enum {string} a Lowercase
- * @enum {string} A Uppercase
+ * @property {string} a Lowercase
+ * @property {string} A Uppercase
 */
 
 
@@ -136,6 +136,15 @@ let config = {
 		},
 		"1": {
 			regex: /[0-9]/g,
+			messages: {
+				name: {
+					es: "números enteros",
+					en: "integer numbers",
+				}
+			},
+		},
+		"2": {
+			regex: /^[0-9]*([\.,]){0,1}[0-9]*/g,
 			messages: {
 				name: {
 					es: "números",

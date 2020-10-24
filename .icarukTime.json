@@ -1,13 +1,13 @@
 {
-    "idleHeartbeats": 20500,
-    "navigatingHeartbeats": 8662,
-    "totalCodingHeartbeats": 48054,
+    "idleHeartbeats": 20984,
+    "navigatingHeartbeats": 8890,
+    "totalCodingHeartbeats": 49565,
     "languageHeartbeats": {
         "jsonc": 198,
-        "javascript": 34527,
+        "javascript": 35408,
         "json": 708,
-        "code-runner-output": 1451,
-        "markdown": 10429,
+        "code-runner-output": 1673,
+        "markdown": 10837,
         "scminput": 171,
         "plaintext": 274,
         "ignore": 58,
@@ -16,7 +16,7 @@
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 172,
-        "index.js": 13342,
+        "index.js": 14011,
         "package.json": 708,
         "extension-output-#9": 779,
         "test.js": 2017,
@@ -26,7 +26,7 @@
         "extension-output-#12": 280,
         "utils/multiReplace.js": 53,
         "test2.js": 1197,
-        "README.md": 9753,
+        "README.md": 10161,
         "validations/req.js": 1111,
         "Untitled-1": 393,
         "utils/strToRegex.js": 46,
@@ -68,6 +68,8 @@
         "tests/email.test.js": 365,
         "README copy.md": 49,
         "README_ES.md": 627,
-        "index.d.ts": 192
+        "index.d.ts": 192,
+        "extension-output-#13": 222,
+        "validations/symbols/number.js": 212
     }
 }
