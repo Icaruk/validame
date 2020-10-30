@@ -38,59 +38,74 @@
 
 const validation = (stringParaValidar = "", rules) => {
 	
-	let configRules = config.rules;
-	let error = "";
+	try {
 	
-	
-	
-	// Convierto de número a string
-	if (typeof stringParaValidar === "number") {
-		stringParaValidar = stringParaValidar.toString();
-	};
-	
-	
-	
-	// Si no es string, undefined ni null, tiro error
-	let type = typeof stringParaValidar;
-	
-	if (
-		type !== "string" &&
-		type !== "undefined" &&
-		stringParaValidar !== null
-	) {
-		return "Error: must validate a string";
-	};
-	
-	
-	
-	// Recorro las propiedades del param rules
-	for (const [key, value] of Object.entries(rules)) {
+		let configRules = config.rules;
+		let error = "";
 		
-		// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
 		
-		if (configRules[key] !== undefined) {
-			
-			const fnc = configRules[key].fnc;
-			
-			
-			if (fnc) {
-				error = fnc(stringParaValidar, value, config);
-			};
-			
-			if (error) break;
 		
-		} else {
-			console.log(`Validame error: rule ${key} not found`);
+		// Convierto de número a string
+		if (typeof stringParaValidar === "number") {
+			stringParaValidar = stringParaValidar.toString();
 		};
 		
+		
+		
+		// Si no es string, undefined ni null, tiro error
+		let type = typeof stringParaValidar;
+		
+		if (
+			type !== "string" &&
+			type !== "undefined" &&
+			stringParaValidar !== null
+		) {
+			return "Error: must validate a string";
+		};
+		
+		
+		
+		// Recorro las propiedades del param rules
+		for (const [key, value] of Object.entries(rules)) {
+			
+			// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
+			
+			if (configRules[key] !== undefined) {
+				
+				const fnc = configRules[key].fnc;
+				
+				
+				if (fnc) {
+					error = fnc(stringParaValidar, value, config);
+				};
+				
+				if (error) break;
+			
+			} else {
+				console.log(`Validame error: rule ${key} not found`);
+			};
+			
+		};
+		
+		
+		// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
+		
+		
+		// Fuerzo pass
+		if (error === "__validame__force_pass") return "";
+		
+		
+		return error;
+		
+	} catch (err) {
+		
+		let msg = "Error: " + err;
+		
+		console.log( msg );
+		return msg;
+		
 	};
-	
-	
-	// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
-	
-	
-	return error;
-	
+		
 };
 
 
@@ -341,6 +356,14 @@ let config = {
 					en: "It can't be empty",
 				}
 			}
+		},
+		
+		passWith: {
+			fnc: require("./validations/rules/passWith"),
+		},
+		
+		failWith: {
+			fnc: require("./validations/rules/failWith"),
 		},
 		
 		disallow: {
