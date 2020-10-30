@@ -25,6 +25,5 @@
 	"license": "ISC",
 	"devDependencies": {
 		"jest": "^26.5.3"
-	},
-	"types": "./index.d.ts"
+	}
 }

@@ -4,8 +4,8 @@ const {validame, validameConfig} = require("./index");
 
 
 let error = validame("a", {
-	passWith: [""],
-	min: 8,
+	min: 1,
+	allow: "a"
 });
 
 if (error === "") {

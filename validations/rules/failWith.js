@@ -1,10 +1,19 @@
 
+const multiReplace = require("../../utils/multiReplace");
+
+
 module.exports = (stringParaValidar, arrPass, config) => {
 	
 	let error = "";
 	
 	
-	if (arrPass.includes(stringParaValidar)) return "__validame__force_pass";
+	let mensaje = config.rules.failWith.messages.error[config.language];
+	
+	let strError = multiReplace(mensaje, {
+		"_%1": mensaje,
+	});
+	
+	if (arrPass.includes(stringParaValidar)) return strError;
 	
 	
 	return error;

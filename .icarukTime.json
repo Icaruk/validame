@@ -1,11 +1,11 @@
 {
-    "idleHeartbeats": 21348,
-    "navigatingHeartbeats": 8996,
-    "totalCodingHeartbeats": 51110,
+    "idleHeartbeats": 21715,
+    "navigatingHeartbeats": 9185,
+    "totalCodingHeartbeats": 53445,
     "languageHeartbeats": {
         "jsonc": 198,
-        "javascript": 36588,
-        "json": 752,
+        "javascript": 38875,
+        "json": 800,
         "code-runner-output": 1723,
         "markdown": 11045,
         "scminput": 171,
@@ -16,8 +16,8 @@
     },
     "fileHeartbeats": {
         "c:\\Users\\Icaruk\\AppData\\Roaming\\Code\\User\\settings.json": 172,
-        "index.js": 14483,
-        "package.json": 752,
+        "index.js": 16030,
+        "package.json": 800,
         "extension-output-#9": 779,
         "test.js": 2017,
         "index2.js": 1362,
@@ -49,7 +49,7 @@
         "tests/dni.js": 207,
         "tests/dni.test.js": 101,
         "playground.js": 1250,
-        "playground2.js": 2129,
+        "playground2.js": 2330,
         "examples/addCustomSymbol.js": 286,
         "examples/addCustomRule.js": 990,
         ".gitignore": 58,
@@ -70,6 +70,9 @@
         "README_ES.md": 627,
         "index.d.ts": 255,
         "extension-output-#13": 222,
-        "validations/symbols/number.js": 212
+        "validations/symbols/number.js": 212,
+        "validations/rules/failWith.js": 151,
+        "tests/failWith.test.js": 364,
+        "tests/passWith.test.js": 24
     }
 }

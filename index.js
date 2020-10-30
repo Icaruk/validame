@@ -9,15 +9,27 @@
  * @property {number} min Number of minimum characters.
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
- * @property {Symbols} allow Symbols to allow. Example: "a 1 _"
-*/
-
-
-
-/**
- * @typedef Symbols
- * @property {string} a Lowercase
- * @property {string} A Uppercase
+ * @property {string} allow Symbols to allow separated with spaces. Example: "a 1 _"
+ * 
+ * - `a`: a-z
+ * - `A`: A-Z
+ * - `aA`: a-zA-Z
+ * - `1`: 0-9
+ * - `2`: 0-9.,
+ * - `_`: spaces
+ * - `!`: (special characters)
+ * - `ñ`: áéíóúñ
+ * - `Ñ`: ÑÁÉÍÓÚ
+ * - `ñÑ`: áéíóúñÑÁÉÍÓÚ
+ * - `phoneEs`: Spanish telephone number.
+ * - `mobileEs`: Spanish mobile number.
+ * - `dni`: Valid DNI (spain).
+ * - `ibanEs`: Spanish IBAN.
+ * - `email`: Email address.
+ * - `postalCodeEs`: Spanish postal code.
+ * 
+ * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
+ * @property {string[]} failWith Fails the validation if the string matches any word
 */
 
 
@@ -364,6 +376,12 @@ let config = {
 		
 		failWith: {
 			fnc: require("./validations/rules/failWith"),
+			messages: {
+				error: {
+					es: "Contiene palabras no permitidas",
+					en: "It contains not allowed words",
+				}
+			}
 		},
 		
 		disallow: {

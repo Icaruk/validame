@@ -163,6 +163,12 @@ validame (stringToValidate, rules);
 	// (Explained below) Contains a list of symbols separated with a space.
 	allow: "a A _ 1",
 	
+	// Pass the validation and skips the next steps if the string matches any word.
+ 	passWith: ["goodWordOne", "goodWordTwo"], 
+	
+	// Fails the validation if the string matches any word.
+	failWith: ["badWordOne", "badWordTwo"],
+	
 }
 ```
 
