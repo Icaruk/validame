@@ -1,10 +1,10 @@
 {
     "idleHeartbeats": 21715,
     "navigatingHeartbeats": 9185,
-    "totalCodingHeartbeats": 53445,
+    "totalCodingHeartbeats": 53479,
     "languageHeartbeats": {
         "jsonc": 198,
-        "javascript": 38875,
+        "javascript": 38909,
         "json": 800,
         "code-runner-output": 1723,
         "markdown": 11045,
@@ -73,6 +73,6 @@
         "validations/symbols/number.js": 212,
         "validations/rules/failWith.js": 151,
         "tests/failWith.test.js": 364,
-        "tests/passWith.test.js": 24
+        "tests/passWith.test.js": 58
     }
 }
