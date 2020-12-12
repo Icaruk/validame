@@ -1,3 +1,4 @@
+
 <div style="text-align:center">
 	<h1> validame </h1>
 	<img src="https://i.gyazo.com/a979d99bac6f4e8d04ee8668634f1cf9.png" />
@@ -20,29 +21,30 @@
 
 
 # Table of contents
+<a id="markdown-table-of-contents" name="table-of-contents"></a>
+
+<!-- TOC -->
 
 - [Table of contents](#table-of-contents)
-- [⬇️ Import](#️-import)
-- [🔮Basic examples](#-basic-examples)
-- [🧭 Usage](#-usage)
-- [📏 Rules](#-rules)
-- [🏳️ Allow rule](#-allow-rule)
-- [✳️ Symbols](#-symbols)
-- [🌍 Language](#-language)
-- [🧾 Editing a symbols and rules](#--editing-symbols-and-rules)
-  - [➡️ `symbols` property](#-symbols-property)
-  - [➡️ `rules` property](#-rules-property)
-- [⚗️ Creating your own rules](#-creating-your-own-rules)
-- [⚗️ Creating your own symbols](#️-creating-your-own-symbols)
-- [🔮 Advanced examples](#-advanced-examples)
+- [Import ⬇️](#import-)
+- [Basic examples 🔮](#basic-examples-)
+- [Usage 🧭](#usage-%F0%9F%A7%AD)
+- [Rules 📏](#rules-)
+- [Allow rule 🏳️](#allow-rule-)
+- [Symbols ✳️](#symbols-)
+- [Language 🌍](#language-)
+- [Editing symbols and rules 🧾](#editing-symbols-and-rules-%F0%9F%A7%BE)
+- [Creating your own rules ⚗️](#creating-your-own-rules-)
+- [Creating your own symbols ⚗️](#creating-your-own-symbols-)
+- [Advanced examples 🔮](#advanced-examples-)
+
+<!-- /TOC -->
+
+<br>
 
 
-
-<br/>
-
-
-
-# ⬇️ Import
+# Import ⬇️
+<a id="markdown-import-%E2%AC%87%EF%B8%8F" name="import-%E2%AC%87%EF%B8%8F"></a>
 
 ```js
 const {validame} = require("validame");
@@ -54,7 +56,8 @@ const {validame} = require("validame");
 
 
 
-# 🔮Basic examples
+# Basic examples 🔮
+<a id="markdown-basic-examples-%F0%9F%94%AE" name="basic-examples-%F0%9F%94%AE"></a>
 
 ```js
 
@@ -125,7 +128,8 @@ let error = validame("My name is Mike", {
 
 
 
-# 🧭 Usage
+# Usage 🧭
+<a id="markdown-usage-%F0%9F%A7%AD" name="usage-%F0%9F%A7%AD"></a>
 
 **Returns** an empty string if the validation is correct, otherwise it returns an string explaining the error.
 
@@ -142,7 +146,8 @@ validame (stringToValidate, rules);
 
 
 
-# 📏 Rules
+# Rules 📏
+<a id="markdown-rules-%F0%9F%93%8F" name="rules-%F0%9F%93%8F"></a>
 
 ```js
 {
@@ -187,8 +192,10 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-# 🏳️ Allow rule
+# Allow rule 🏳️
+<a id="markdown-allow-rule-%F0%9F%8F%B3%EF%B8%8F" name="allow-rule-%F0%9F%8F%B3%EF%B8%8F"></a>
 
+- The allow rule reads a list of **symbols**.
 - The symbol list must be **separated with a space**, example: `a A _ !`.
 - If `stringToValidate` contains one or more characters **outside the allow list** it will return an error.
 - The validation is done from **left to right**.
@@ -200,14 +207,15 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-# ✳️ Symbols
+# Symbols ✳️
+<a id="markdown-symbols-%E2%9C%B3%EF%B8%8F" name="symbols-%E2%9C%B3%EF%B8%8F"></a>
 
 - **Regex**:
 	- `a`: `a-z`
 	- `A`: `A-Z`
 	- `aA`: `a-zA-Z`
-	- `1`: `0-9`
-	- `2`: `0-9.,`
+	- `1`: `0-9 (only integers)`
+	- `2`: `0-9 (integers or decimals)`
 	- `_`: `spaces`
 	- `!`: `ºª\!|"@·#€\$%&¬/()=?'¿¡^``\[+]´,{}-_<>~`
 	- `ñ`: `áéíóúñ`
@@ -233,7 +241,8 @@ The rules will be checked in the same order they are listed, example:
 
 
 
-# 🌍 Language
+# Language 🌍
+<a id="markdown-language-%F0%9F%8C%8D" name="language-%F0%9F%8C%8D"></a>
 
 ```js
 const {validameConfig} = require("validame");
@@ -250,7 +259,8 @@ At the moment the possible options are `es` and `en` but you can add your own la
 
 
 
-# 🧾 Editing symbols and rules
+# Editing symbols and rules 🧾
+<a id="markdown-editing-symbols-and-rules-%F0%9F%A7%BE" name="editing-symbols-and-rules-%F0%9F%A7%BE"></a>
 
 ```js
 const {validameConfig} = require("validame");
@@ -260,7 +270,7 @@ valiadmeConfig.rules = {...};
 ```
 
 
-## ➡️ `symbols` property
+##  1. <a name='symbolsproperty'></a>➡️ `symbols` property
 
 They are used inside `allow` rule. Example: `allow: "aA 1"` (letters and numbers).
 
@@ -307,7 +317,7 @@ Examples:
 
 
 
-## ➡️ `rules` property
+##  2. <a name='rulesproperty'></a>➡️ `rules` property
 
 - **fnc** `function`: Used when the rule is called.
 - The next properties are an `object` with the name of the error message for the rule:
@@ -342,7 +352,7 @@ min: {
 }
 ```
 
-### 🔴 The `_%1` `_%2` (and so on) are replacers.
+###  2.1. <a name='The_1_2andsoonarereplacers.'></a>🔴 The `_%1` `_%2` (and so on) are replacers.
 
 
 
@@ -350,7 +360,8 @@ min: {
 
 
 
-# ⚗️ Creating your own rules
+# Creating your own rules ⚗️
+<a id="markdown-creating-your-own-rules-%E2%9A%97%EF%B8%8F" name="creating-your-own-rules-%E2%9A%97%EF%B8%8F"></a>
 
 ```js
 // Import
@@ -421,7 +432,8 @@ let error2 = validame("Mike", {
 
 
 
-# ⚗️ Creating your own symbols
+# Creating your own symbols ⚗️
+<a id="markdown-creating-your-own-symbols-%E2%9A%97%EF%B8%8F" name="creating-your-own-symbols-%E2%9A%97%EF%B8%8F"></a>
 
 ```js
 // Import
@@ -485,7 +497,8 @@ let error2 = validame("17", {
 
 
 
-# 🔮 Advanced examples
+# Advanced examples 🔮
+<a id="markdown-advanced-examples-%F0%9F%94%AE" name="advanced-examples-%F0%9F%94%AE"></a>
 
 
 ```js
@@ -560,6 +573,6 @@ let error = validame(null, {
 
 ---
 
-### [⏫](#table-of-contents)
+###  2.2. <a name='table-of-contents'></a>[⏫](#table-of-contents)
 
 

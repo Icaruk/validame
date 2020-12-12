@@ -264,7 +264,7 @@ declare namespace config {
     };
     namespace rules {
         namespace allow {
-            const fnc: typeof import("./validations/rules/allow");
+            const fnc: (stringParaValidar: any, strAllow: any, config: any) => any;
             namespace messages {
                 namespace itsOnlyAllowed {
                     const es: string;
@@ -279,7 +279,7 @@ declare namespace config {
             }
         }
         namespace min {
-            const fnc_1: typeof import("./validations/rules/min");
+            const fnc_1: (stringParaValidar: any, minLength: any, config: any) => string;
             export { fnc_1 as fnc };
             export namespace messages_1 {
                 namespace error {
@@ -292,7 +292,7 @@ declare namespace config {
             export { messages_1 as messages };
         }
         namespace max {
-            const fnc_2: typeof import("./validations/rules/max");
+            const fnc_2: (stringParaValidar: any, maxLength: any, config: any) => string;
             export { fnc_2 as fnc };
             export namespace messages_2 {
                 export namespace error_1 {
@@ -306,7 +306,7 @@ declare namespace config {
             export { messages_2 as messages };
         }
         namespace minMax {
-            const fnc_3: typeof import("./validations/rules/minMax");
+            const fnc_3: (stringParaValidar: any, exactLength: any, config: any) => string;
             export { fnc_3 as fnc };
             export namespace messages_3 {
                 export namespace error_2 {
@@ -320,7 +320,7 @@ declare namespace config {
             export { messages_3 as messages };
         }
         namespace req {
-            const fnc_4: typeof import("./validations/rules/req");
+            const fnc_4: (stringParaValidar: any, mode: any, config: any) => string;
             export { fnc_4 as fnc };
             export namespace messages_4 {
                 export namespace error_3 {
@@ -334,11 +334,11 @@ declare namespace config {
             export { messages_4 as messages };
         }
         namespace passWith {
-            const fnc_5: typeof import("./validations/rules/passWith");
+            const fnc_5: (stringParaValidar: any, arrPass: any, config: any) => string;
             export { fnc_5 as fnc };
         }
         namespace failWith {
-            const fnc_6: typeof import("./validations/rules/failWith");
+            const fnc_6: (stringParaValidar: any, arrPass: any, config: any) => string;
             export { fnc_6 as fnc };
             export namespace messages_5 {
                 export namespace error_4 {
