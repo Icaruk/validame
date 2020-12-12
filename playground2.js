@@ -3,9 +3,8 @@
 const {validame, validameConfig} = require("./index");
 
 
-let error = validame("asd que tal 2.2", {
-	min: 1,
-	allow: "a 1 _"
+let error = validame("p", {
+	password: [1]
 });
 
 if (error === "") {

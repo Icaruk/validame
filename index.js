@@ -1,4 +1,5 @@
 
+
 /**
  * @typedef Rules
  * @property {0 | 1 | 2} req Required:
@@ -30,6 +31,8 @@
  * 
  * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
  * @property {string[]} failWith Fails the validation if the string matches any word
+ * @property {[uppercase: number, lowercase: number, numbers: number]} password Minimum characters needed
+ * 
 */
 
 
@@ -298,8 +301,9 @@ let config = {
 				}
 			},
 		},
-		
 	},
+	
+	
 	
 	rules: {
 		
@@ -368,6 +372,24 @@ let config = {
 					en: "It can't be empty",
 				}
 			}
+		},
+		
+		password: {
+			fnc: require("./validations/rules/password"),
+			messages: {
+				lower: {
+					es: "Tiene que tener al menos _%1 minúscula(s).",
+					en: "It must have at least _%1 lowercase character(s).",
+				},
+				upper: {
+					es: "Tiene que tener al menos _%1 mayúscula(s).",
+					en: "It must have at least _%1 uppercase character(s).",
+				},
+				number: {
+					es: "Tiene que tener al menos _%1 número(s).",
+					en: "It must have at least _%1 number(s).",
+				},
+			},			
 		},
 		
 		passWith: {

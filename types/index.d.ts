@@ -47,6 +47,10 @@ export type Rules = {
      * Fails the validation if the string matches any word
      */
     failWith: string[];
+    /**
+     * Minimum characters needed
+     */
+    password: [uppercase: number, lowercase: number, numbers: number];
 };
 /**
  * @typedef Rules
@@ -79,6 +83,8 @@ export type Rules = {
  *
  * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
  * @property {string[]} failWith Fails the validation if the string matches any word
+ * @property {[uppercase: number, lowercase: number, numbers: number]} password Minimum characters needed
+ *
 */
 /**
  * Validates a string.
@@ -333,37 +339,62 @@ declare namespace config {
             }
             export { messages_4 as messages };
         }
-        namespace passWith {
-            const fnc_5: (stringParaValidar: any, arrPass: any, config: any) => string;
+        namespace password {
+            const fnc_5: (stringParaValidar: any, value: any, config: any) => string;
             export { fnc_5 as fnc };
-        }
-        namespace failWith {
-            const fnc_6: (stringParaValidar: any, arrPass: any, config: any) => string;
-            export { fnc_6 as fnc };
             export namespace messages_5 {
-                export namespace error_4 {
+                namespace lower {
                     const es_6: string;
                     export { es_6 as es };
                     const en_6: string;
                     export { en_6 as en };
                 }
-                export { error_4 as error };
-            }
-            export { messages_5 as messages };
-        }
-        namespace disallow {
-            const fnc_7: string;
-            export { fnc_7 as fnc };
-            export namespace messages_6 {
-                export namespace error_5 {
+                namespace upper {
                     const es_7: string;
                     export { es_7 as es };
                     const en_7: string;
                     export { en_7 as en };
                 }
-                export { error_5 as error };
+                namespace number {
+                    const es_8: string;
+                    export { es_8 as es };
+                    const en_8: string;
+                    export { en_8 as en };
+                }
+            }
+            export { messages_5 as messages };
+        }
+        namespace passWith {
+            const fnc_6: (stringParaValidar: any, arrPass: any, config: any) => string;
+            export { fnc_6 as fnc };
+        }
+        namespace failWith {
+            const fnc_7: (stringParaValidar: any, arrPass: any, config: any) => string;
+            export { fnc_7 as fnc };
+            export namespace messages_6 {
+                export namespace error_4 {
+                    const es_9: string;
+                    export { es_9 as es };
+                    const en_9: string;
+                    export { en_9 as en };
+                }
+                export { error_4 as error };
             }
             export { messages_6 as messages };
+        }
+        namespace disallow {
+            const fnc_8: string;
+            export { fnc_8 as fnc };
+            export namespace messages_7 {
+                export namespace error_5 {
+                    const es_10: string;
+                    export { es_10 as es };
+                    const en_10: string;
+                    export { en_10 as en };
+                }
+                export { error_5 as error };
+            }
+            export { messages_7 as messages };
         }
     }
 }
