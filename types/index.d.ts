@@ -399,6 +399,7 @@ declare namespace config {
     }
 }
 declare namespace utils {
-    const multiReplace: typeof import("./utils/multiReplace");
+    const multiReplace: (text?: string, objReplace?: {}) => string;
 }
 export { validation as validame, config as validameConfig, utils as validameUtils };
+declare module "validame";
