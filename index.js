@@ -201,7 +201,7 @@ let config = {
 			},
 		},
 		"ñ": {
-			regex: /[ñáéíóú]/g,
+			regex: /[ñáéíóú']/g,
 			messages: {
 				name: {
 					es: "tildes y ñ",
@@ -210,7 +210,7 @@ let config = {
 			}
 		},
 		"Ñ": {
-			regex: /[ÑÁÉÍÓÚ]/g,
+			regex: /[ÑÁÉÍÓÚ']/g,
 			messages: {	
 				name: {
 					es: "tildes y Ñ",
@@ -219,7 +219,7 @@ let config = {
 			},
 		},
 		"ñÑ": {
-			regex: /[ñáéíóú]/gi,
+			regex: /[ñáéíóú']/gi,
 			messages: {
 				name: {
 					es: "tildes, ñ y Ñ",

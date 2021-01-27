@@ -31,6 +31,12 @@ describe("email", () => {
 		["email fail 4", "asd,asd@asd.com.es"],
 		["email fail 5", "asd!asd@asd.es"],
 		["email fail 6", "asd!asd@asd.abcd"],
+		
+		["email fail 6", "asd;asd@asd.abcd"],
+		["email fail 7", "asdçasd@asd.abcd"],
+		["email fail 8", "asdáasd@asd.abcd"],
+		["email fail 9", "asd asd@asd.abcd"],
+		["email fail 10", "asd	asd@asd.abcd"],
 	].forEach( _x => {
 		
 		test(_x[0], () => {

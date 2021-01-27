@@ -402,4 +402,3 @@ declare namespace utils {
     const multiReplace: (text?: string, objReplace?: {}) => string;
 }
 export { validation as validame, config as validameConfig, utils as validameUtils };
-declare module "validame";
