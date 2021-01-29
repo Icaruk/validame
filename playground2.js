@@ -3,8 +3,8 @@
 const {validame, validameConfig} = require("./index");
 
 
-let error = validame("p", {
-	password: [1]
+let error = validame("meli_20-@hotmail.com", {
+	allow: "email"
 });
 
 if (error === "") {

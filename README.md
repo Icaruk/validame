@@ -20,7 +20,7 @@
 
 
 
-# Table of contents {ignore=true}
+# Table of contents
 
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
@@ -350,7 +350,7 @@ min: {
 }
 ```
 
-### 🔴 The `_%1` `_%2` (and so on) are replacers.  {ignore=true}
+### 🔴 The `_%1` `_%2` (and so on) are replacers.
 
 
 
@@ -567,6 +567,6 @@ let error = validame(null, {
 
 ---
 
-###  <a name='table-of-contents'></a>[⏫](#table-of-contents) {ignore=true}
+###  <a name='table-of-contents'></a>[⏫](#table-of-contents)
 
 

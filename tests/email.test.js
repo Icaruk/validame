@@ -10,6 +10,14 @@ describe("email", () => {
 		["email 3", "asd2@asd.jp"],
 		["email 4", "asd_asd@asd.com.es"],
 		["email 5", "asd-asd@asd.es"],
+		["email 6", "asd-@asd.es"],
+		["email 7", "asd_@asd.es"],
+		["email 8", "asd--@asd.es"],
+		["email 9", "asd__@asd.es"],
+		["email 10", "as-as@asd.es"],
+		["email 11", "as_as@asd.es"],
+		["email 12", "as--as--@asd.es"],
+		["email 13", "as__as__@asd.es"],
 	].forEach( _x => {
 		
 		test(_x[0], () => {
