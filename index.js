@@ -10,7 +10,7 @@
  * @property {number} min Number of minimum characters.
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
- * @property {string} allow Symbols to allow separated with spaces. Example: "a 1 _"
+ * @property {string} allow Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _". 
  * 
  * - `a`: a-z
  * - `A`: A-Z
@@ -29,6 +29,7 @@
  * - `email`: Email address.
  * - `postalCodeEs`: Spanish postal code.
  * 
+ * @property {string} allowOr Symbols (only functions, not regex) to allow, they are checked from left to right, if all of them fails, returns the first error. Example: "dni cif".
  * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
  * @property {string[]} failWith Fails the validation if the string matches any word
  * @property {[uppercase: number, lowercase: number, numbers: number]} password Minimum characters needed
@@ -266,6 +267,19 @@ let config = {
 				}
 			},
 		},
+		"cif": {
+			regex: require("./validations/symbols/cif").cif,
+			messages: {
+				length: {
+					es: "Longitud de CIF incorrecta",
+					en: "Invalid CIF length",
+				},
+				structure: {
+					es: "CIF inválido o no tiene la siguiente estructura: A1234567B",
+					en: "Invalid CIF or it hasn't the following structure: A1234567B",
+				}
+			},
+		},
 		"email": {
 			regex: require("./validations/symbols/email").email,
 			messages: {
@@ -309,6 +323,19 @@ let config = {
 		
 		allow: {
 			fnc: require("./validations/rules/allow"),
+			messages: {
+				itsOnlyAllowed: {
+					es: "Sólo se permite: ",
+					en: "It's only allowed: ",
+				},
+				and: {
+					es: " y ",
+					en: " and ",
+				}
+			},
+		},
+		allowOr: {
+			fnc: require("./validations/rules/allowOr"),
 			messages: {
 				itsOnlyAllowed: {
 					es: "Sólo se permite: ",

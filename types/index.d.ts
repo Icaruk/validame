@@ -19,7 +19,7 @@ export type Rules = {
      */
     minMax: number;
     /**
-     * Symbols to allow separated with spaces. Example: "a 1 _"
+     * Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
      *
      * - `a`: a-z
      * - `A`: A-Z
@@ -39,6 +39,10 @@ export type Rules = {
      * - `postalCodeEs`: Spanish postal code.
      */
     allow: string;
+    /**
+     * Symbols (only functions, not regex) to allow, they are checked from left to right, if all of them fails, returns the first error. Example: "dni cif".
+     */
+    allowOr: string;
     /**
      * Pass the validation and skips the next steps if the string matches any word
      */
@@ -62,7 +66,7 @@ export type Rules = {
  * @property {number} min Number of minimum characters.
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
- * @property {string} allow Symbols to allow separated with spaces. Example: "a 1 _"
+ * @property {string} allow Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
  *
  * - `a`: a-z
  * - `A`: A-Z
@@ -81,6 +85,7 @@ export type Rules = {
  * - `email`: Email address.
  * - `postalCodeEs`: Spanish postal code.
  *
+ * @property {string} allowOr Symbols (only functions, not regex) to allow, they are checked from left to right, if all of them fails, returns the first error. Example: "dni cif".
  * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
  * @property {string[]} failWith Fails the validation if the string matches any word
  * @property {[uppercase: number, lowercase: number, numbers: number]} password Minimum characters needed
@@ -232,6 +237,19 @@ declare namespace config {
                 };
             };
         };
+        cif: {
+            regex: (stringParaValidar: any, config: any) => any;
+            messages: {
+                length: {
+                    es: string;
+                    en: string;
+                };
+                structure: {
+                    es: string;
+                    en: string;
+                };
+            };
+        };
         email: {
             regex: (stringParaValidar: any, config: any) => any;
             messages: {
@@ -284,117 +302,138 @@ declare namespace config {
                 }
             }
         }
-        namespace min {
-            const fnc_1: (stringParaValidar: any, minLength: any, config: any) => string;
+        namespace allowOr {
+            const fnc_1: (stringParaValidar: any, strAllow: any, config: any) => any;
             export { fnc_1 as fnc };
             export namespace messages_1 {
-                namespace error {
+                export namespace itsOnlyAllowed_1 {
                     const es_2: string;
                     export { es_2 as es };
                     const en_2: string;
                     export { en_2 as en };
                 }
-            }
-            export { messages_1 as messages };
-        }
-        namespace max {
-            const fnc_2: (stringParaValidar: any, maxLength: any, config: any) => string;
-            export { fnc_2 as fnc };
-            export namespace messages_2 {
-                export namespace error_1 {
+                export { itsOnlyAllowed_1 as itsOnlyAllowed };
+                export namespace and_1 {
                     const es_3: string;
                     export { es_3 as es };
                     const en_3: string;
                     export { en_3 as en };
                 }
-                export { error_1 as error };
+                export { and_1 as and };
             }
-            export { messages_2 as messages };
+            export { messages_1 as messages };
         }
-        namespace minMax {
-            const fnc_3: (stringParaValidar: any, exactLength: any, config: any) => string;
-            export { fnc_3 as fnc };
-            export namespace messages_3 {
-                export namespace error_2 {
+        namespace min {
+            const fnc_2: (stringParaValidar: any, minLength: any, config: any) => string;
+            export { fnc_2 as fnc };
+            export namespace messages_2 {
+                namespace error {
                     const es_4: string;
                     export { es_4 as es };
                     const en_4: string;
                     export { en_4 as en };
                 }
-                export { error_2 as error };
             }
-            export { messages_3 as messages };
+            export { messages_2 as messages };
         }
-        namespace req {
-            const fnc_4: (stringParaValidar: any, mode: any, config: any) => string;
-            export { fnc_4 as fnc };
-            export namespace messages_4 {
-                export namespace error_3 {
+        namespace max {
+            const fnc_3: (stringParaValidar: any, maxLength: any, config: any) => string;
+            export { fnc_3 as fnc };
+            export namespace messages_3 {
+                export namespace error_1 {
                     const es_5: string;
                     export { es_5 as es };
                     const en_5: string;
                     export { en_5 as en };
                 }
-                export { error_3 as error };
+                export { error_1 as error };
             }
-            export { messages_4 as messages };
+            export { messages_3 as messages };
         }
-        namespace password {
-            const fnc_5: (stringParaValidar: any, value: any, config: any) => string;
-            export { fnc_5 as fnc };
-            export namespace messages_5 {
-                namespace lower {
+        namespace minMax {
+            const fnc_4: (stringParaValidar: any, exactLength: any, config: any) => string;
+            export { fnc_4 as fnc };
+            export namespace messages_4 {
+                export namespace error_2 {
                     const es_6: string;
                     export { es_6 as es };
                     const en_6: string;
                     export { en_6 as en };
                 }
-                namespace upper {
+                export { error_2 as error };
+            }
+            export { messages_4 as messages };
+        }
+        namespace req {
+            const fnc_5: (stringParaValidar: any, mode: any, config: any) => string;
+            export { fnc_5 as fnc };
+            export namespace messages_5 {
+                export namespace error_3 {
                     const es_7: string;
                     export { es_7 as es };
                     const en_7: string;
                     export { en_7 as en };
                 }
-                namespace number {
+                export { error_3 as error };
+            }
+            export { messages_5 as messages };
+        }
+        namespace password {
+            const fnc_6: (stringParaValidar: any, value: any, config: any) => string;
+            export { fnc_6 as fnc };
+            export namespace messages_6 {
+                namespace lower {
                     const es_8: string;
                     export { es_8 as es };
                     const en_8: string;
                     export { en_8 as en };
                 }
-            }
-            export { messages_5 as messages };
-        }
-        namespace passWith {
-            const fnc_6: (stringParaValidar: any, arrPass: any, config: any) => string;
-            export { fnc_6 as fnc };
-        }
-        namespace failWith {
-            const fnc_7: (stringParaValidar: any, arrPass: any, config: any) => string;
-            export { fnc_7 as fnc };
-            export namespace messages_6 {
-                export namespace error_4 {
+                namespace upper {
                     const es_9: string;
                     export { es_9 as es };
                     const en_9: string;
                     export { en_9 as en };
                 }
-                export { error_4 as error };
-            }
-            export { messages_6 as messages };
-        }
-        namespace disallow {
-            const fnc_8: string;
-            export { fnc_8 as fnc };
-            export namespace messages_7 {
-                export namespace error_5 {
+                namespace number {
                     const es_10: string;
                     export { es_10 as es };
                     const en_10: string;
                     export { en_10 as en };
                 }
-                export { error_5 as error };
+            }
+            export { messages_6 as messages };
+        }
+        namespace passWith {
+            const fnc_7: (stringParaValidar: any, arrPass: any, config: any) => string;
+            export { fnc_7 as fnc };
+        }
+        namespace failWith {
+            const fnc_8: (stringParaValidar: any, arrPass: any, config: any) => string;
+            export { fnc_8 as fnc };
+            export namespace messages_7 {
+                export namespace error_4 {
+                    const es_11: string;
+                    export { es_11 as es };
+                    const en_11: string;
+                    export { en_11 as en };
+                }
+                export { error_4 as error };
             }
             export { messages_7 as messages };
+        }
+        namespace disallow {
+            const fnc_9: string;
+            export { fnc_9 as fnc };
+            export namespace messages_8 {
+                export namespace error_5 {
+                    const es_12: string;
+                    export { es_12 as es };
+                    const en_12: string;
+                    export { en_12 as en };
+                }
+                export { error_5 as error };
+            }
+            export { messages_8 as messages };
         }
     }
 }

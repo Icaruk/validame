@@ -12,6 +12,9 @@ module.exports = (stringParaValidar, strAllow, config) => {
 		
 		
 		
+		let arrErrores = [];
+		
+		
 		// Itero el array, por ejemplo: ["a", "1", "_"]
 		for (_symbol of arrWl) {
 			
@@ -43,7 +46,7 @@ module.exports = (stringParaValidar, strAllow, config) => {
 			} else if (typeof fnc === "function") {
 				
 				let error = fnc(stringParaValidar, config);
-				return error;
+				arrErrores.push(error);
 				
 			};
 			
@@ -74,10 +77,18 @@ module.exports = (stringParaValidar, strAllow, config) => {
 				});
 				
 				
-				return error;
+				arrErrores.push(error);
 				
 			};
 		};
+		
+		
+		
+		console.log( arrErrores );
+		
+		if (arrErrores.length > 0 && arrErrores.every( _x => _x !== "")) {
+			return arrErrores.find( _x => _x !== "");
+		};		
 		
 		
 		return "";
