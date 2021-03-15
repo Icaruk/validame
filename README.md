@@ -35,8 +35,6 @@
 - [Symbols ✳️](#symbols-)
 - [Language 🌍](#language-)
 - [Editing symbols and rules 🧾](#editing-symbols-and-rules-%F0%9F%A7%BE)
-	- [➡️ symbols property](#-symbols-property)
-	- [➡️ rules property](#-rules-property)
 - [Creating your own rules ⚗️](#creating-your-own-rules-)
 - [Creating your own symbols ⚗️](#creating-your-own-symbols-)
 - [Advanced examples 🔮](#advanced-examples-)
@@ -201,11 +199,12 @@ The rules will be checked in the same order they are listed, example:
 # allow rule 🏳️
 <a id="markdown-allow-rule-%F0%9F%8F%B3%EF%B8%8F" name="allow-rule-%F0%9F%8F%B3%EF%B8%8F"></a>
 
-- The allow rule reads a list of **symbols**.
-- The symbol list must be **separated with a space**, example: `a A _ !`.
-- If `stringToValidate` contains one or more characters **outside the allow list** or one function symbol returns an error it will return it.
+- The allow rule reads a list of **symbols** *(explained below)*.
+- The symbol list must be **separated with spaces**.
+  > Example: `a A _ !`.
+- If **one symbol fails** it will return the error.
+  > Example: `a 1` (lowercase and numbers) will fail with "Mike123" but pass with "mike123".
 - The validation is done from **left to right**.
-- Each symbol has a **regex or function** associated.
 
 
 
@@ -214,8 +213,9 @@ The rules will be checked in the same order they are listed, example:
 # allowOr rule 🏳️
 <a id="markdown-allowor-rule-%F0%9F%8F%B3%EF%B8%8F" name="allowor-rule-%F0%9F%8F%B3%EF%B8%8F"></a>
 
-- Same mechanics than allow rule, but instead stopping if one symbols fails, it stops if all symbols fails, returning the first error.
-- **It only works with function symbols, not regex.**
+- Same mechanics than `allow` rule, but instead stopping if one symbols fails, **it will stop if all symbols fails**, returning the first error.
+
+> ❌ It only works with **function symbols**, not regex.
 
 
 
@@ -226,7 +226,9 @@ The rules will be checked in the same order they are listed, example:
 # Symbols ✳️
 <a id="markdown-symbols-%E2%9C%B3%EF%B8%8F" name="symbols-%E2%9C%B3%EF%B8%8F"></a>
 
-- **Regex**:
+Each symbol is unique and has a **regex or function** associated.
+
+- **Regex symbols**:
 	- `a`: `a-z`
 	- `A`: `A-Z`
 	- `aA`: `a-zA-Z`
@@ -239,18 +241,20 @@ The rules will be checked in the same order they are listed, example:
 	- `ñÑ`: `áéíóúñÑÁÉÍÓÚ`
 <br/>
 
-- **Functions**:
+- **Function symbols**:
 	- `phoneEs`: Spanish telephone number.
 	- `mobileEs`: Spanish mobile number.
 	- `dni`: Valid DNI (spain).
-	- `vif`: Valid CIF (spain).
+	- `cif`: Valid CIF (spain).
 	- `ibanEs`: Spanish IBAN.
 	- `email`: Email address.
 	- `postalCodeEs`: Spanish postal code.
 
 <br/>
 
-- If the symbols are regex, the error string is built automatically.
+> ✅ If the symbols are **regex**, the error string is built automatically.
+> Example, with `"a 1"` the error string will be:
+> `It's only allowed: lowercase and numbers`
 
 
 
@@ -264,11 +268,15 @@ The rules will be checked in the same order they are listed, example:
 ```js
 const {validameConfig} = require("validame");
 
-validameConfig.language = "es";
+validameConfig.language = "en";
 ```
 
-It specifies the language of the errors given.
-At the moment the possible options are `es` and `en` but you can add your own language and translations.
+It specifies the language of the errors given, default `"es"`.
+At the moment the possible options are:
+- `es`
+- `en`
+
+But you can add your own language and translations.
 
 
 
@@ -288,7 +296,6 @@ valiadmeConfig.rules = {...};
 
 
 ## ➡️ `symbols` property
-<a id="markdown-%E2%9E%A1%EF%B8%8F-symbols-property" name="%E2%9E%A1%EF%B8%8F-symbols-property"></a>
 
 They are used inside `allow` rule. Example: `allow: "aA 1"` (letters and numbers).
 
@@ -336,7 +343,6 @@ Examples:
 
 
 ## ➡️ `rules` property
-<a id="markdown-%E2%9E%A1%EF%B8%8F-rules-property" name="%E2%9E%A1%EF%B8%8F-rules-property"></a>
 
 - **fnc** `function`: Used when the rule is called.
 - The next properties are an `object` with the name of the error message for the rule:
@@ -371,7 +377,7 @@ min: {
 }
 ```
 
-### 🔴 The `_%1` `_%2` (and so on) are replacers.
+> 🔴 The `_%1` `_%2` (and so on) are replacers.
 
 
 

@@ -83,9 +83,6 @@ module.exports = (stringParaValidar, strAllow, config) => {
 		};
 		
 		
-		
-		console.log( arrErrores );
-		
 		if (arrErrores.length > 0 && arrErrores.every( _x => _x !== "")) {
 			return arrErrores.find( _x => _x !== "");
 		};		

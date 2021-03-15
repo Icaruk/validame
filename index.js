@@ -134,7 +134,7 @@ const utils = {
 
 let config = {
 	
-	language: "en", // es, en, fr
+	language: "es", // es, en, fr
 	
 	symbols: {
 		
