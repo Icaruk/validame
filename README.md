@@ -8,7 +8,7 @@
 
 **validame** is a javascript **string validator** that returns the error message.
 
-- 🚀 Lightweight (10 kB packed and 45 kB unpacked).
+- 🚀 Lightweight (12 kB packed and 53 kB unpacked).
 - ⚪️ Zero dependencies.
 - 🔧 Totally customizable.
 - 🧩 Modular.
