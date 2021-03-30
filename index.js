@@ -1,3 +1,19 @@
+const allow = require("./validations/rules/allow");
+const allowOr = require("./validations/rules/allowOr");
+const failWith = require("./validations/rules/failWith");
+const max = require("./validations/rules/max");
+const min = require("./validations/rules/min");
+const minMax = require("./validations/rules/minMax");
+const passWith = require("./validations/rules/passWith");
+const password = require("./validations/rules/password");
+const req = require("./validations/rules/req");
+const { cif } = require("./validations/symbols/cif");
+const { dni } = require("./validations/symbols/dni");
+const { email } = require("./validations/symbols/email");
+const { ibanEs } = require("./validations/symbols/iban");
+const { phoneEs, mobileEs } = require("./validations/symbols/phone");
+const { postalCodeEs } = require("./validations/symbols/postalCode");
+
 
 
 /**
@@ -229,7 +245,7 @@ let config = {
 			},
 		},
 		"phoneEs": {
-			regex: require("./validations/symbols/phone").phoneEs,
+			regex: phoneEs,
 			messages: {
 				invalid: {
 					es: "No es un teléfono español válido",
@@ -242,7 +258,7 @@ let config = {
 			},
 		},
 		"mobileEs": {
-			regex: require("./validations/symbols/phone").mobileEs,
+			regex: mobileEs,
 			messages: {
 				invalid: {
 					es: "No es un móvil español válido",
@@ -255,7 +271,7 @@ let config = {
 			},
 		},
 		"dni": {
-			regex: require("./validations/symbols/dni").dni,
+			regex: dni,
 			messages: {
 				invalid: {
 					es: "No es un DNI válido",
@@ -268,7 +284,7 @@ let config = {
 			},
 		},
 		"cif": {
-			regex: require("./validations/symbols/cif").cif,
+			regex: cif,
 			messages: {
 				length: {
 					es: "Longitud de CIF incorrecta",
@@ -281,7 +297,7 @@ let config = {
 			},
 		},
 		"email": {
-			regex: require("./validations/symbols/email").email,
+			regex: email,
 			messages: {
 				invalid: {
 					es: "No es un email válido",
@@ -290,7 +306,7 @@ let config = {
 			},
 		},
 		"ibanEs": {
-			regex: require("./validations/symbols/iban").ibanEs,
+			regex: ibanEs,
 			messages: {
 				invalid: {
 					es: "No es un IBAN válido",
@@ -303,7 +319,7 @@ let config = {
 			},
 		},
 		"postalCodeEs": {
-			regex: require("./validations/symbols/postalCode").postalCodeEs,
+			regex: postalCodeEs,
 			messages: {
 				invalid: {
 					es: "No es válido",
@@ -322,7 +338,7 @@ let config = {
 	rules: {
 		
 		allow: {
-			fnc: require("./validations/rules/allow"),
+			fnc: allow,
 			messages: {
 				itsOnlyAllowed: {
 					es: "Sólo se permite: ",
@@ -335,7 +351,7 @@ let config = {
 			},
 		},
 		allowOr: {
-			fnc: require("./validations/rules/allowOr"),
+			fnc: allowOr,
 			messages: {
 				itsOnlyAllowed: {
 					es: "Sólo se permite: ",
@@ -362,7 +378,7 @@ let config = {
 		// },
 		
 		min: {
-			fnc: require("./validations/rules/min"),
+			fnc: min,
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres como mínimo pero tiene _%2.",
@@ -372,7 +388,7 @@ let config = {
 		},
 		
 		max: {
-			fnc: require("./validations/rules/max"),
+			fnc: max,
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres como máximo pero tiene _%2.",
@@ -382,7 +398,7 @@ let config = {
 		},
 		
 		minMax: {
-			fnc: require("./validations/rules/minMax"),
+			fnc: minMax,
 			messages: {
 				error: {
 					es: "Debería tener _%1 caracteres pero tiene _%2.",
@@ -392,7 +408,7 @@ let config = {
 		},
 		
 		req: {
-			fnc: require("./validations/rules/req"),
+			fnc: req,
 			messages: {
 				error: {
 					es: "No puede estar vacío",
@@ -402,7 +418,7 @@ let config = {
 		},
 		
 		password: {
-			fnc: require("./validations/rules/password"),
+			fnc: password,
 			messages: {
 				lower: {
 					es: "Tiene que tener al menos _%1 minúscula(s).",
@@ -420,11 +436,11 @@ let config = {
 		},
 		
 		passWith: {
-			fnc: require("./validations/rules/passWith"),
+			fnc: passWith,
 		},
 		
 		failWith: {
-			fnc: require("./validations/rules/failWith"),
+			fnc: failWith,
 			messages: {
 				error: {
 					es: "Contiene palabras no permitidas",

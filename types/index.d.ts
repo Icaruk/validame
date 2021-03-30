@@ -288,8 +288,8 @@ declare namespace config {
     };
     namespace rules {
         namespace allow {
-            const fnc: (stringParaValidar: any, strAllow: any, config: any) => any;
-            namespace messages {
+            export { allow as fnc };
+            export namespace messages {
                 namespace itsOnlyAllowed {
                     const es: string;
                     const en: string;
@@ -303,8 +303,7 @@ declare namespace config {
             }
         }
         namespace allowOr {
-            const fnc_1: (stringParaValidar: any, strAllow: any, config: any) => any;
-            export { fnc_1 as fnc };
+            export { allowOr as fnc };
             export namespace messages_1 {
                 export namespace itsOnlyAllowed_1 {
                     const es_2: string;
@@ -324,8 +323,7 @@ declare namespace config {
             export { messages_1 as messages };
         }
         namespace min {
-            const fnc_2: (stringParaValidar: any, minLength: any, config: any) => string;
-            export { fnc_2 as fnc };
+            export { min as fnc };
             export namespace messages_2 {
                 namespace error {
                     const es_4: string;
@@ -337,8 +335,7 @@ declare namespace config {
             export { messages_2 as messages };
         }
         namespace max {
-            const fnc_3: (stringParaValidar: any, maxLength: any, config: any) => string;
-            export { fnc_3 as fnc };
+            export { max as fnc };
             export namespace messages_3 {
                 export namespace error_1 {
                     const es_5: string;
@@ -351,8 +348,7 @@ declare namespace config {
             export { messages_3 as messages };
         }
         namespace minMax {
-            const fnc_4: (stringParaValidar: any, exactLength: any, config: any) => string;
-            export { fnc_4 as fnc };
+            export { minMax as fnc };
             export namespace messages_4 {
                 export namespace error_2 {
                     const es_6: string;
@@ -365,8 +361,7 @@ declare namespace config {
             export { messages_4 as messages };
         }
         namespace req {
-            const fnc_5: (stringParaValidar: any, mode: any, config: any) => string;
-            export { fnc_5 as fnc };
+            export { req as fnc };
             export namespace messages_5 {
                 export namespace error_3 {
                     const es_7: string;
@@ -379,8 +374,7 @@ declare namespace config {
             export { messages_5 as messages };
         }
         namespace password {
-            const fnc_6: (stringParaValidar: any, value: any, config: any) => string;
-            export { fnc_6 as fnc };
+            export { password as fnc };
             export namespace messages_6 {
                 namespace lower {
                     const es_8: string;
@@ -404,12 +398,10 @@ declare namespace config {
             export { messages_6 as messages };
         }
         namespace passWith {
-            const fnc_7: (stringParaValidar: any, arrPass: any, config: any) => string;
-            export { fnc_7 as fnc };
+            export { passWith as fnc };
         }
         namespace failWith {
-            const fnc_8: (stringParaValidar: any, arrPass: any, config: any) => string;
-            export { fnc_8 as fnc };
+            export { failWith as fnc };
             export namespace messages_7 {
                 export namespace error_4 {
                     const es_11: string;
@@ -422,8 +414,7 @@ declare namespace config {
             export { messages_7 as messages };
         }
         namespace disallow {
-            const fnc_9: string;
-            export { fnc_9 as fnc };
+            export const fnc: string;
             export namespace messages_8 {
                 export namespace error_5 {
                     const es_12: string;
@@ -440,4 +431,13 @@ declare namespace config {
 declare namespace utils {
     const multiReplace: (text?: string, objReplace?: {}) => string;
 }
+import allow_1 = require("./validations/rules/allow");
+import allowOr_1 = require("./validations/rules/allowOr");
+import min_1 = require("./validations/rules/min");
+import max_1 = require("./validations/rules/max");
+import minMax_1 = require("./validations/rules/minMax");
+import req_1 = require("./validations/rules/req");
+import password_1 = require("./validations/rules/password");
+import passWith_1 = require("./validations/rules/passWith");
+import failWith_1 = require("./validations/rules/failWith");
 export { validation as validame, config as validameConfig, utils as validameUtils };
