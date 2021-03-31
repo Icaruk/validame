@@ -9,7 +9,6 @@ module.exports = (stringParaValidar, exactLength, config) => {
 	let length = stringParaValidar.length;
 	
 	
-	
 	if (length !== exactLength) {
 		
 		let mensaje = config.rules.minMax.messages.error[config.language];
