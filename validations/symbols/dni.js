@@ -22,10 +22,14 @@ exports.dni = (stringParaValidar, config) => {
 	
 	if (isNaN( parseInt(stringParaValidar[0]) )) {// el primer dígito es una letra
 		
-		// Sustituyo las letras XYZ por 012, respectivamente
-		dni = dni.replace("X", 0);
-		dni = dni.replace("Y", 1);
-		dni = dni.replace("Z", 2);
+		// Sustituyo la letra inicial X, Y o Z por 0, 1 o 2 respectivamente
+		let primeraLetra = dni[0];
+		
+		if (primeraLetra === "X") primeraLetra = 0;
+		else if (primeraLetra === "Y") primeraLetra = 1;
+		else if (primeraLetra === "Z") primeraLetra = 2;
+		
+		dni = primeraLetra + dni.slice(1);
 	};
 	
 	let length = stringParaValidar.length;

@@ -11,6 +11,7 @@ describe("dni", () => {
 		["dni extranjero 1", "X3621968C"],
 		["dni extranjero 2", "Y7717973S"],
 		["dni extranjero 3", "Z7163072A"],
+		["dni extranjero 4", "X4152733Z"],
 	].forEach( _x => {
 		
 		test(_x[0], () => {
