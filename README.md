@@ -201,10 +201,16 @@ The rules will be checked in the same order they are listed, example:
 
 - The allow rule reads a list of **symbols** *(explained below)*.
 - The symbol list must be **separated with spaces**.
+  
   > Example: `a A _ !`.
-- If **one symbol fails** it will return the error.
-  > Example: `a 1` (lowercase and numbers) will fail with "Mike123" but pass with "mike123".
-- The validation is done from **left to right**.
+
+- The validations are done from **left to right**.
+- If **one symbol fails** it will return the error and stops the validation, otherwise the next symbol will be read.
+  
+  > - Example: `"a 1"` (lowercase and numbers) will fail with "Mike123" but pass with "mike123".
+  > - Example: `"costlessPrefixEs phoneEs"` will fail with "807456789" because "807" is a paid prefix.
+  
+- If the symbol list is filled with regex symbols, they all will be read because they can't fail. They make an "allowlist" and will only fail if there is a character outside that allowlist.
 
 
 
@@ -213,7 +219,9 @@ The rules will be checked in the same order they are listed, example:
 # allowOr rule 🏳️
 <a id="markdown-allowor-rule-%F0%9F%8F%B3%EF%B8%8F" name="allowor-rule-%F0%9F%8F%B3%EF%B8%8F"></a>
 
-- Same mechanics than `allow` rule, but instead stopping if one symbols fails, **it will stop if all symbols fails**, returning the first error.
+- Same mechanics than `allow` rule, but this one needs **all symbols failing** to return an error.
+- The returned error it's from the first failed symbol.
+
 
 > ❌ It only works with **function symbols**, not regex.
 
@@ -228,7 +236,16 @@ The rules will be checked in the same order they are listed, example:
 
 Each symbol is unique and has a **regex or function** associated.
 
+
 - **Regex symbols**:
+
+	> Allow rule with regex symbols describes an allowlist.
+	> Examples:
+	> - `allow: "a"` with `"mike123"` will fail because numbers are not in the allowlist.
+	> - `allow: "a 1"` with `"mike123"` will pass because there are no characters outside the allowlist.
+	> - `allow: "a 1"` with `"mike"` will pass because there are no characters outside the allowlist.
+	> - `allow: "1 a"` with `"mike"` will pass because there are no characters outside the allowlist.
+	
 	- `a`: `a-z`
 	- `A`: `A-Z`
 	- `aA`: `a-zA-Z`
@@ -239,6 +256,7 @@ Each symbol is unique and has a **regex or function** associated.
 	- `ñ`: `áéíóúñ`
 	- `Ñ`: `ÑÁÉÍÓÚ`
 	- `ñÑ`: `áéíóúñÑÁÉÍÓÚ`
+	
 <br/>
 
 - **Function symbols**:

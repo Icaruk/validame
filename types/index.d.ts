@@ -20,6 +20,10 @@ export type Rules = {
     minMax: number;
     /**
      * Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
+     */
+    allow: string;
+    /**
+     * Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
      *
      * - `a`: a-z
      * - `A`: A-Z
@@ -33,14 +37,11 @@ export type Rules = {
      * - `ñÑ`: áéíóúñÑÁÉÍÓÚ
      * - `phoneEs`: Spanish telephone number.
      * - `mobileEs`: Spanish mobile number.
+     * - `costlessPrefixEs`: Prevents paid spanish prefixes.
      * - `dni`: Valid DNI (spain).
      * - `ibanEs`: Spanish IBAN.
      * - `email`: Email address.
      * - `postalCodeEs`: Spanish postal code.
-     */
-    allow: string;
-    /**
-     * Symbols (only functions, not regex) to allow, they are checked from left to right, if all of them fails, returns the first error. Example: "dni cif".
      */
     allowOr: string;
     /**
@@ -67,6 +68,7 @@ export type Rules = {
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
  * @property {string} allow Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
+ * @property {string} allowOr Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _".
  *
  * - `a`: a-z
  * - `A`: A-Z
@@ -80,6 +82,7 @@ export type Rules = {
  * - `ñÑ`: áéíóúñÑÁÉÍÓÚ
  * - `phoneEs`: Spanish telephone number.
  * - `mobileEs`: Spanish mobile number.
+ * - `costlessPrefixEs`: Prevents paid spanish prefixes.
  * - `dni`: Valid DNI (spain).
  * - `ibanEs`: Spanish IBAN.
  * - `email`: Email address.
@@ -219,6 +222,15 @@ declare namespace config {
                     en: string;
                 };
                 digits: {
+                    es: string;
+                    en: string;
+                };
+            };
+        };
+        costlessPrefixEs: {
+            regex: (stringParaValidar: any, config: any) => any;
+            messages: {
+                invalid: {
                     es: string;
                     en: string;
                 };

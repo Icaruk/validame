@@ -43,7 +43,7 @@ module.exports = (stringParaValidar, strAllow, config) => {
 			} else if (typeof fnc === "function") {
 				
 				let error = fnc(stringParaValidar, config);
-				return error;
+				if (error) return error;
 				
 			};
 			

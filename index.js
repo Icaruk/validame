@@ -11,7 +11,7 @@ const { cif } = require("./validations/symbols/cif");
 const { dni } = require("./validations/symbols/dni");
 const { email } = require("./validations/symbols/email");
 const { ibanEs } = require("./validations/symbols/iban");
-const { phoneEs, mobileEs } = require("./validations/symbols/phone");
+const { phoneEs, mobileEs, costlessPrefixEs } = require("./validations/symbols/phone");
 const { postalCodeEs } = require("./validations/symbols/postalCode");
 
 
@@ -27,6 +27,7 @@ const { postalCodeEs } = require("./validations/symbols/postalCode");
  * @property {number} max Number of maximum characters.
  * @property {number} minMax Number of exact characters.
  * @property {string} allow Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _". 
+ * @property {string} allowOr Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _". 
  * 
  * - `a`: a-z
  * - `A`: A-Z
@@ -40,6 +41,7 @@ const { postalCodeEs } = require("./validations/symbols/postalCode");
  * - `ñÑ`: áéíóúñÑÁÉÍÓÚ
  * - `phoneEs`: Spanish telephone number.
  * - `mobileEs`: Spanish mobile number.
+ * - `costlessPrefixEs`: Prevents paid spanish prefixes.
  * - `dni`: Valid DNI (spain).
  * - `ibanEs`: Spanish IBAN.
  * - `email`: Email address.
@@ -268,6 +270,15 @@ let config = {
 					es: "Debe tener 9 dígitos",
 					en: "It must have 9 digits",
 				}
+			},
+		},
+		"costlessPrefixEs": {
+			regex: costlessPrefixEs,
+			messages: {
+				invalid: {
+					es: "No se permite un prefijo de pago",
+					en: "A paid prefix isn't allowed",
+				},
 			},
 		},
 		"dni": {

@@ -37,3 +37,15 @@ exports.mobileEs = (stringParaValidar, config) => {
 	
 };
 
+
+
+exports.costlessPrefixEs = (stringParaValidar, config) => {
+	
+	let correcto = !["901", "902", "905", "803", "806", "807"].includes(stringParaValidar.slice(0, 3));
+	if (! correcto) return config.symbols.costlessPrefixEs.messages.invalid[config.language];
+	
+	
+	return "";
+	
+};
+

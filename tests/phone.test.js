@@ -77,4 +77,42 @@ describe("mobile", () => {
 		
 	});
 	
+	
+	
+	[
+		["costlessPrefixEs 1", "costlessPrefixEs", "600456789"],
+		["costlessPrefixEs 2", "costlessPrefixEs", "700456789"],
+		["phoneEs costlessPrefixEs", "phoneEs costlessPrefixEs", "900456789"],
+		["phoneEs costlessPrefixEs", "mobileEs costlessPrefixEs", "600456789"],
+	].forEach( _x => {
+		
+		test(_x[0], () => {
+			expect(
+				validame(_x[2], {
+					allow: _x[1]
+				})
+			).toBe("");
+		});
+		
+	});
+	
+	
+	
+	[
+		["costlessPrefixEs 1", "costlessPrefixEs", "901456789"],
+		["costlessPrefixEs 2", "costlessPrefixEs", "807456789"],
+		["phoneEs costlessPrefixEs", "phoneEs costlessPrefixEs", "807456789"],
+		["phoneEs costlessPrefixEs", "mobileEs costlessPrefixEs", "807456789"],
+	].forEach( _x => {
+		
+		test(_x[0], () => {
+			expect(
+				validame(_x[2], {
+					allow: _x[1]
+				})
+			).not.toBe("");
+		});
+		
+	});
+	
 });
