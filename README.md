@@ -5,6 +5,8 @@
 </div>
 
 
+[![install size](https://packagephobia.com/badge?p=validame@latest)](https://packagephobia.com/result?p=validame@latest)
+
 
 **validame** is a javascript **string validator** that returns the error message.
 
