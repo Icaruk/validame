@@ -14,6 +14,10 @@ const { ibanEs } = require("./validations/symbols/iban");
 const { phoneEs, mobileEs, costlessPrefixEs } = require("./validations/symbols/phone");
 const { postalCodeEs } = require("./validations/symbols/postalCode");
 
+const any = require("./methods/any");
+const none = require("./methods/none");
+const all = require("./methods/all");
+
 
 
 /**
@@ -70,13 +74,12 @@ const { postalCodeEs } = require("./validations/symbols/postalCode");
  * 
 */
 
-const validation = (stringParaValidar = "", rules) => {
+const validame = (stringParaValidar = "", methods) => {
+	
 	
 	try {
-	
-		let configRules = config.rules;
-		let error = "";
 		
+		let result = "";
 		
 		
 		// Convierto de número a string
@@ -99,37 +102,39 @@ const validation = (stringParaValidar = "", rules) => {
 		
 		
 		
-		// Recorro las propiedades del param rules
-		for (const [key, value] of Object.entries(rules)) {
+		const methodResults = [];
+		
+		
+		// Recorro las propiedades del param methods
+		for (const [method, validations] of Object.entries(methods)) {
 			
-			// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
+			let objMethod = config.methods.find(_x => _x.name.includes(method));
 			
-			if (configRules[key] !== undefined) {
-				
-				const fnc = configRules[key].fnc;
-				
-				
-				if (fnc) {
-					error = fnc(stringParaValidar, value, config);
-				};
-				
-				if (error) break;
+			const methodResult = objMethod.fnc(stringParaValidar, validations, config);
 			
-			} else {
-				console.log(`Validame error: rule ${key} not found`);
+			console.log( "******** METHOD", method, methodResult );
+			
+			
+			methodResults.push(methodResult);
+			
+			if (!methodResult.isCorrect) {
+				break;
 			};
 			
 		};
+		
+		
+		console.log( "methodResults", `(${typeof methodResults}): `, methodResults);
 		
 		
 		// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
 		
 		
 		// Fuerzo pass
-		if (error === "__validame__force_pass") return "";
+		// if (result === "__validame__force_pass") return "";
 		
 		
-		return error;
+		return methodResults[0];
 		
 	} catch (err) {
 		
@@ -154,7 +159,8 @@ let config = {
 	
 	language: "es", // es, en, fr
 	
-	symbols: {
+	
+	validations: {
 		
 		"a": {
 			regex: /[a-z]/g,
@@ -207,6 +213,42 @@ let config = {
 				name: {
 					es: "espacios",
 					en: "spaces",
+				}	
+			},
+		},
+		".": {
+			regex: /[.,]/g,
+			messages: {
+				name: {
+					es: "caracteres especiales",
+					en: "special characters",
+				}	
+			},
+		},
+		":": {
+			regex: /[:;]/g,
+			messages: {
+				name: {
+					es: "caracteres especiales",
+					en: "special characters",
+				}	
+			},
+		},
+		"'": {
+			regex: /['"`´]/g,
+			messages: {
+				name: {
+					es: "caracteres especiales",
+					en: "special characters",
+				}	
+			},
+		},
+		"º": {
+			regex: /[ºª]/g,
+			messages: {
+				name: {
+					es: "caracteres especiales",
+					en: "special characters",
 				}	
 			},
 		},
@@ -342,7 +384,34 @@ let config = {
 				}
 			},
 		},
+		
 	},
+	
+	
+	
+	methods: [
+		{
+			name: ["any", ","],
+			fnc: any,
+		},
+		{
+			name: ["none", "!"],
+			fnc: none,
+		},
+		{
+			name: ["all", "*"],
+			fnc: all,
+		},
+		{
+			name: ["only", "."],
+			fnc: () => {},
+		},
+		{
+			name: ["except", "x"],
+			fnc: () => {},
+		},
+	],
+	
 	
 	
 	
@@ -478,7 +547,7 @@ let config = {
 
 
 module.exports = {
-	validame: validation,
+	validame: validame,
 	validameConfig: config,
 	validameUtils: utils,
 };

@@ -6,16 +6,24 @@ validameConfig.language = "es";
 
 
 
-let error = validame("mike", {
-	allow: "1 a"
+let {isCorrect, message} = validame("123 a", {
+	// none: [
+	// 	/pepe/
+	// ],
+	all: [
+		/[a-z]/,
+		/[0-9]/,
+	],
 });
 
 
+console.log( "" );
 
-if (error === "") {
+
+if (isCorrect) {
 	console.log( "playground ✅" );
 } else {
-	console.log("playground ❌", error );
+	console.log("playground ❌", message );
 };
 
 
