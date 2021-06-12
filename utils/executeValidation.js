@@ -7,18 +7,11 @@ module.exports = function executeValidation(stringToValidate, validation, config
 	if (typeof validation === "string") {
 		
 		console.log( "		------ STRING" );
-		// validation2 = config.validations[validation];
+		// config.validations[validation];
 	
 	} else if (validation instanceof RegExp) {	
 		
-		console.log( "		------ REGEX\n" );
-		console.log( validation, "test.", stringToValidate );
-		
 		const correct = validation.test(stringToValidate);
-		
-		console.log( "correct", `(${typeof correct}): `, correct);
-		console.log( "" );
-		
 		const objCorrect = {isCorrect: correct};
 		
 		if (!correct) objCorrect.message = "El texto no es válido";

@@ -124,17 +124,20 @@ const validame = (stringParaValidar = "", methods) => {
 		};
 		
 		
-		console.log( "methodResults", `(${typeof methodResults}): `, methodResults);
+		console.log( "=============== methodResults", `(${typeof methodResults}): `, methodResults);
 		
 		
-		// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
+		const incorrectMethod = methodResults.find( _x => !_x.isCorrect );
+		
+		
+		if (incorrectMethod) return incorrectMethod;
+		
+		return { isCorrect: true, message: "" };
 		
 		
 		// Fuerzo pass
 		// if (result === "__validame__force_pass") return "";
 		
-		
-		return methodResults[0];
 		
 	} catch (err) {
 		
