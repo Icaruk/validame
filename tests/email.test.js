@@ -58,6 +58,11 @@ describe("email", () => {
 		",asd@asd.es",
 		" asd@asd.es",
 		"-asd@asd.es",
+		"ñasd@asd.es",
+		"ásd@asd.es",
+		"a'sd@asd.es",
+		'a"sd@asd.es',
+		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 	].forEach( (_x, _idx) => {
 		
 				test(`email_${_idx}`, () => {
