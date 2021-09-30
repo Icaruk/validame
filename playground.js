@@ -6,8 +6,8 @@ validameConfig.language = "es";
 
 
 
-let error = validame("mike", {
-	allow: "1 a"
+let error = validame("pepe", {
+	
 });
 
 

@@ -1,10 +1,67 @@
+const allow = require("./validations/rules/allow");
+const allowOr = require("./validations/rules/allowOr");
+const failWith = require("./validations/rules/failWith");
+const max = require("./validations/rules/max");
+const min = require("./validations/rules/min");
+const minMax = require("./validations/rules/minMax");
+const passWith = require("./validations/rules/passWith");
+const password = require("./validations/rules/password");
+const req = require("./validations/rules/req");
+const { cif } = require("./validations/symbols/cif");
+const { dni } = require("./validations/symbols/dni");
+const { email } = require("./validations/symbols/email");
+const { ibanEs } = require("./validations/symbols/iban");
+const { phoneEs, mobileEs, costlessPrefixEs } = require("./validations/symbols/phone");
+const { postalCodeEs } = require("./validations/symbols/postalCode");
+
+
+
+/**
+ * @typedef Rules
+ * @property {0 | 1 | 2} req Required:
+ * - 0: disabled
+ * - 1: allows null but fails with ""
+ * - 2: fails with null and ""
+ * 
+ * @property {number} min Number of minimum characters.
+ * @property {number} max Number of maximum characters.
+ * @property {number} minMax Number of exact characters.
+ * @property {string} allow Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _". 
+ * @property {string} allowOr Symbols to allow separated with spaces, they are checked from left to right, if one fails it stops there. Example: "a 1 _". 
+ * 
+ * - `a`: a-z
+ * - `A`: A-Z
+ * - `aA`: a-zA-Z
+ * - `1`: 0-9
+ * - `2`: 0-9.,
+ * - `_`: spaces
+ * - `!`: (special characters)
+ * - `ñ`: áéíóúñ
+ * - `Ñ`: ÑÁÉÍÓÚ
+ * - `ñÑ`: áéíóúñÑÁÉÍÓÚ
+ * - `phoneEs`: Spanish telephone number.
+ * - `mobileEs`: Spanish mobile number.
+ * - `costlessPrefixEs`: Prevents paid spanish prefixes.
+ * - `dni`: Valid DNI (spain).
+ * - `ibanEs`: Spanish IBAN.
+ * - `email`: Email address.
+ * - `postalCodeEs`: Spanish postal code.
+ * 
+ * @property {string} allowOr Symbols (only functions, not regex) to allow, they are checked from left to right, if all of them fails, returns the first error. Example: "dni cif".
+ * @property {string[]} passWith Pass the validation and skips the next steps if the string matches any word
+ * @property {string[]} failWith Fails the validation if the string matches any word
+ * @property {[uppercase: number, lowercase: number, numbers: number]} password Minimum characters needed
+ * 
+*/
+
+
 
 /**
  * Validates a string.
  * https://www.npmjs.com/package/validame
  * ___
  * 
- * @param {string} text - String to validate.
+ * @param {string} stringParaValidar - String to validate.
  * @param {Rules} rules - Object that contains a list with one or more rules.
  * 
  * ___
@@ -13,40 +70,66 @@
  * 
 */
 
-const validation = (text = "", config) => {
+const validation = (stringParaValidar = "", rules) => {
 	
 	try {
-		
+	
 		let configRules = config.rules;
 		let error = "";
 		
 		
 		
 		// Convierto de número a string
-		if (typeof text === "number") text = text.toString();
+		if (typeof stringParaValidar === "number") {
+			stringParaValidar = stringParaValidar.toString();
+		};
+		
 		
 		
 		// Si no es string, undefined ni null, tiro error
-		let type = typeof text;
-		if (text === null) type = "null";
+		let type = typeof stringParaValidar;
 		
-		
-		if (type !== "string") {
-			return new TypeError(`text should be string. Received ${type}`);
+		if (
+			type !== "string" &&
+			type !== "undefined" &&
+			stringParaValidar !== null
+		) {
+			return "Error: must validate a string";
 		};
 		
 		
 		
 		// Recorro las propiedades del param rules
-		for (const [_key, _value] of Object.entries(rules)) {
+		for (const [key, value] of Object.entries(rules)) {
 			
-			console.log( _key );
+			// Obtengo la función asociada a la regla (min, max, minmax, req, wl...)
+			
+			if (configRules[key] !== undefined) {
+				
+				const fnc = configRules[key].fnc;
+				
+				
+				if (fnc) {
+					error = fnc(stringParaValidar, value, config);
+				};
+				
+				if (error) break;
+			
+			} else {
+				console.log(`Validame error: rule ${key} not found`);
+			};
 			
 		};
 		
 		
-		return "";
-		// return error;
+		// console.log( "------------ LLEGO AL FINAL SIN NINGÚN ERROR -------------" );
+		
+		
+		// Fuerzo pass
+		if (error === "__validame__force_pass") return "";
+		
+		
+		return error;
 		
 	} catch (err) {
 		
@@ -57,6 +140,12 @@ const validation = (text = "", config) => {
 		
 	};
 		
+};
+
+
+
+const utils = {
+	multiReplace: require("./utils/multiReplace"),
 };
 
 
