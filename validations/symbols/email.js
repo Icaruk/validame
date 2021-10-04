@@ -16,7 +16,7 @@ exports.email = (stringParaValidar, config) => {
 	if (tieneCaracteres) return config.symbols.email.messages.invalid[config.language];
 	
 	// let regex = new RegExp(/^\w+([\.-]*\w+[\.-]*)*@\w+([\.-]?\w+)*(\.\w{2,16})+$/, "g"); // old: vulnerable to ReDoS
-	regex = new RegExp(/^[\w\.\-\+]+@\w+(\.[\w\-]{2,16})+$/, "g");
+	regex = new RegExp(/^[\w\.\-\+]+@[a-zA-Z0-9\.-]+(\.[\w\-]{2,16})+$/, "g");
 	correcto = regex.test(stringParaValidar);
 	if (! correcto) return config.symbols.email.messages.invalid[config.language];
 	
